@@ -1,0 +1,102 @@
+#contactForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+  margin: 2% 15%;
+  padding: 2%;
+  background-color: #ffddd2;
+  border-radius: 28px;
+  gap: 1.5rem;
+}
+
+#contactForm input,
+#contactForm textarea {
+  width: 100%;
+  padding: 0.8em 2em;
+  border-radius: 0.8em;
+  border-style: none;
+  color: #005a62;
+  position: relative;
+}
+
+.contact-form-title {
+  color: #974220;
+  font-weight: 900;
+  margin: 2%;
+}
+
+#contactForm button {
+  padding: 1% 5%;
+  border-radius: 1rem;
+  background-color: #974220;
+  color: white;
+  border-style: none;
+  cursor: pointer;
+}
+
+#contactForm button:hover {
+  box-shadow: 2px 2px 5px #e29578;
+}
+
+#contactForm .formGroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80%;
+  gap: 1rem;
+  border-style: none;
+}
+
+#contactForm .inputContainer {
+  width: 80%;
+  position: relative;
+}
+
+#contactForm fieldset .inputContainer {
+  width: 45%;
+}
+
+#contactForm .inputContainer label {
+  content: "First Name";
+  color: #ffffff;
+  font-weight: 600;
+  position: absolute;
+  top: -0.8em;
+  left: 1em;
+  font-size: 0.8em;
+  padding: 0.1em 0.8em;
+  background-color: #e29578;
+  z-index: 100;
+  display: none;
+}
+
+#contactForm input:focus-visible + label,
+#contactForm textarea:focus-visible + label,
+#contactForm label.label-active {
+  display: block;
+}
+
+@media (max-width: 500px) {
+  #contactForm {
+    width: 90%;
+    margin: 5%;
+    padding: 5% 2%;
+  }
+
+  #contactForm .formGroup {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 1rem;
+  }
+
+  #contactForm button {
+    padding: 2% 10%;
+  }
+
+  #contactForm fieldset .inputContainer {
+    width: 100%;
+  }
+}

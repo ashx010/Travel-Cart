@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -16,18 +12,66 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@font-face {
+  font-family: "font1";
+  src: url("/font1.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "font2";
+  src: url("/font2.otf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "font3";
+  src: url("/font3.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "teacher";
+  src: url("/Teacher-Vintage.otf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "canada";
+  src: url("/canada.otf");
+  font-weight: 400;
+  font-style: normal;
+  text-transform: none;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f1faee;
+  font-family: "canada";
+  cursor: url("/cursor.png") 10 10, auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 7px; /* for vertical scroll */
+  height: 7px; /* for horizontal scroll */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #005a62;
+  border: 1px solid var(--white);
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+}
+
+@media (max-width: 850px) {
+  body {
+    cursor: auto;
   }
 }

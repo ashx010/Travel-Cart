@@ -1,0 +1,32 @@
+.cards-list-container-parent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  margin: 5% 10%;
+  border-radius: 1em;
+  align-items: flex-start;
+  padding: 2% 4%;
+  transition: all 1s ease-in-out;
+}
+
+.cards-list-container{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  width: 98%;
+  margin: 1%;
+  border-radius: 1em;
+  align-items: center;
+  overflow: auto;
+  padding: 2%;
+  gap: 1rem;
+  transition: all 1s ease-in-out;
+}
+
+@media (max-width: 500px) {
+  .cards-list-container-parent{
+    margin: 5% 2%;
+    width: 90%;
+  }
+}

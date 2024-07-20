@@ -1,0 +1,227 @@
+.services-offered-list {
+  width: 90%;
+  margin: 0% 5%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title-servicesOffered {
+  font-size: 5em;
+  width: 100%;
+  text-align: end;
+  padding: 3% 10%;
+  text-transform: uppercase;
+  font-family: "font2";
+}
+
+.card-container-servicesOffered {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  width: 16rem !important;
+}
+
+.card-image-servicesOffered {
+  width: 16rem !important;
+}
+
+.card-header-servicesOffered {
+  position: relative;
+}
+
+.card-header-servicesOffered.card-1::before {
+  position: absolute;
+  top: 0;
+  left: 0%;
+  height: 100%;
+  width: 60%;
+  z-index: -10;
+  transition: all 0.5s ease;
+  content: "";
+  border-radius: 1em;
+  rotate: 0deg;
+  filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+.card-header-servicesOffered.card-1::after {
+  position: absolute;
+  top: 0;
+  right: 0%;
+  height: 100%;
+  width: 80%;
+  z-index: -10;
+  transition: all 0.5s ease;
+  content: "";
+  border-radius: 1em;
+  rotate: 5deg;
+  filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+.card-header-servicesOffered.card-1:hover::before {
+  left: -35%;
+  rotate: -20deg;
+  z-index: 10;
+}
+
+.card-header-servicesOffered.card-1:hover::after {
+  right: -25%;
+  top: -10%;
+  rotate: -20deg;
+  z-index: 10;
+}
+
+.card-header-servicesOffered.card-2::after {
+  position: absolute;
+  top: 0;
+  left: 0%;
+  height: 60%;
+  width: 100%;
+  z-index: -10;
+  transition: all 0.5s ease;
+  content: "";
+  border-radius: 1em;
+  filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+.card-header-servicesOffered.card-2::before {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  width: 80%;
+  aspect-ratio: 1.5;
+  z-index: -10;
+  transition: all 0.5s ease;
+  content: "";
+  border-radius: 1em;
+  filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+.card-header-servicesOffered.card-2:hover::before {
+  left: -25%;
+  bottom: -5%;
+  z-index: 10;
+}
+
+.card-header-servicesOffered.card-2:hover::after {
+  top: -40%;
+  left: 15%;
+  width: 100%;
+}
+
+.card-header-servicesOffered.card-3::before {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  width: 100%;
+  aspect-ratio: 1.5;
+  z-index: -10;
+  transition: all 0.5s ease;
+  content: "";
+  border-radius: 1em;
+  filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+.card-header-servicesOffered.card-3:hover::before {
+  left: -20%;
+  width: 90%;
+  bottom: -10%;
+  z-index: 10;
+}
+
+.card-header-servicesOffered.card-4::after {
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  width: 100%;
+  aspect-ratio: 1.5;
+  z-index: -10;
+  transition: all 0.5s ease;
+  content: "";
+  border-radius: 1em;
+  filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.7));
+}
+
+.card-header-servicesOffered.card-4:hover::after {
+  left: -20%;
+  width: 140%;
+  bottom: -10%;
+  z-index: 10;
+}
+
+.card-body-heading-servicesOffered {
+  font-size: 1.2em !important;
+}
+
+@media (max-width: 1300px) {
+  .card-container-servicesOffered {
+    width: 12rem !important;
+  }
+  .card-image-servicesOffered {
+    width: 12rem !important;
+  }
+  .card-body-heading-servicesOffered {
+    font-size: 1.1em !important;
+  }
+  .title-servicesOffered {
+    padding: 5% 6%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .services-offered-list {
+    gap: 1em 2em;
+    flex-wrap: wrap;
+  }
+  .card-body-heading-servicesOffered {
+    font-size: 1em !important;
+  }
+
+  .card-header-servicesOffered.card-1:hover::before {
+    left: -20%;
+    rotate: -20deg;
+    opacity: 1;
+    z-index: 10;
+  }
+
+  .card-header-servicesOffered.card-1:hover::after {
+    right: -15%;
+    top: -5%;
+    rotate: -20deg;
+    opacity: 1;
+    z-index: 10;
+  }
+}
+
+@media (max-width: 850px) {
+  .title-servicesOffered {
+    font-size: 3em;
+    width: 100%;
+    text-align: start;
+    padding: 5% 5%;
+    text-transform: uppercase;
+    font-family: "font2";
+  }
+  .services-offered-list {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 500px) {
+  .services-offered-list {
+    gap: 1em 2em;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .title-servicesOffered {
+    font-size: 2em;
+  }
+  .card-container-servicesOffered {
+    width: 9rem !important;
+  }
+  .card-image-servicesOffered {
+    width: 9rem !important;
+  }
+  .card-body-heading-servicesOffered {
+    font-size: 0.8em !important;
+  }
+}
