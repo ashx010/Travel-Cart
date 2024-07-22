@@ -3,7 +3,6 @@ import "./Navbar.css";
 import PropTypes from "prop-types";
 
 export default function Navbar({
-  titleName = "Navbar",
   link1 = "Home",
   link2 = "About",
   link3 = "Contact",
@@ -11,9 +10,6 @@ export default function Navbar({
 }) {
   return (
     <nav className="navbar-c">
-      <li className="title">
-        <a href="/">{titleName}</a>
-      </li>
       <ul className="navbar-links-c">
         <li>
           <a href="/">{link1}</a>
@@ -33,7 +29,6 @@ export default function Navbar({
 }
 
 Navbar.propTypes = {
-  titleName: PropTypes.string.isRequired,
   link1: PropTypes.string,
   link2: PropTypes.string,
   link3: PropTypes.string,

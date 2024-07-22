@@ -1,10 +1,36 @@
-"use client"; 
+"use client";
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import "./HeroPage.css";
 import Ncard from "../Card/Ncard";
+import Button from "@mui/material/Button";
+import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import { styled } from '@mui/material/styles';
+
+const SearchButton = styled(Button)({
+  color: "#f1faee",
+  backgroundColor: "#1d3557",
+  fontFamily: "LTR",
+  border: "none",
+  "&:hover": {
+    backgroundColor: "#a8dadc",
+    color: "#1d3557",
+  },
+});
+
+const ExploreButton = styled(Button)({
+  color: "#1d3557",
+  backgroundColor: "#a8dadc",
+  fontFamily: "LTR",
+  "&:hover": {
+    backgroundColor: "#457b9d",
+    color: "#f1faee",
+  },
+});
 
 export default function HeroPage({
+  titleName = "Scripet",
   heroPageTitle = "TBOOK",
   heroPageSubTitle = `"Explore the World's Wonders - Tailored Just for You"`,
   imgSrcList = [
@@ -12,7 +38,7 @@ export default function HeroPage({
       itemNo: 1,
       name: "USA",
       city: "New York",
-      src: "/usa_newyork.jpeg",
+      src: "/home_carousel/usa_newyork.jpeg",
       color: "#A8DADC",
       textColor: "black",
     },
@@ -20,7 +46,7 @@ export default function HeroPage({
       itemNo: 2,
       name: "China",
       city: "Shanghai",
-      src: "/china_shanghai.jpeg",
+      src: "/home_carousel/china_shanghai.jpeg",
       color: "#457B9D",
       textColor: "black",
     },
@@ -28,7 +54,7 @@ export default function HeroPage({
       itemNo: 3,
       name: "Japan",
       city: "Tokyo",
-      src: "/Japan_tokyo.jpeg",
+      src: "/home_carousel/Japan_tokyo.jpeg",
       color: "#1D3557",
       textColor: "white",
     },
@@ -38,7 +64,8 @@ export default function HeroPage({
   const [translateXProp, setTranslateXProp] = useState("translateX(0)");
   const [translateMainProp, setTranslateMainProp] = useState("translate(0,0)");
   const [translateYProp, setTranslateYProp] = useState("translate(0%, 0%)");
-  const [cardTwoStyleHover, setTwoCardStyleHover] = useState("translate(3%, -6%)");
+  const [cardTwoStyleHover, setTwoCardStyleHover] =
+    useState("translate(3%, -6%)");
   const [responsiveCond, setResponsiveCond] = useState(false);
 
   useEffect(() => {
@@ -94,10 +121,17 @@ export default function HeroPage({
 
   return (
     <div className="hero-container">
+      <div className="title">{titleName}</div>
       <div className="text-container">
         {currImgSrcList[0].name}
         <div className="city">
-          <button className="explore-button">{currImgSrcList[0].city}</button>
+          <ExploreButton
+            variant="contained"
+            size="small"
+            endIcon={<TravelExploreIcon />}
+          >
+            {currImgSrcList[0].city}
+          </ExploreButton>
         </div>
       </div>
       <div
@@ -200,9 +234,15 @@ export default function HeroPage({
               type="text"
               name="email-hero-subscriber"
               className="subscribe-input-hero"
-              placeholder="Enter your email address"
+              placeholder="Enter Destination"
             />
-            <button className="subscribe-button-hero">Newsletter</button>
+            <SearchButton
+              variant="contained"
+              size="medium"
+              endIcon={<ModeOfTravelIcon />}
+            >
+              Search
+            </SearchButton>
           </div>
         </div>
       )}

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -14,31 +18,41 @@
 
 @font-face {
   font-family: "font1";
-  src: url("/font1.ttf");
+  src: url("/fonts/font1.ttf");
   font-weight: 400;
   font-style: normal;
+  letter-spacing: 2px;
 }
 @font-face {
   font-family: "font2";
-  src: url("/font2.otf");
+  src: url("/fonts/font2.otf");
   font-weight: 400;
   font-style: normal;
+  letter-spacing: 2px;
 }
 @font-face {
   font-family: "font3";
-  src: url("/font3.ttf");
+  src: url("/fonts/font3.ttf");
   font-weight: 400;
   font-style: normal;
+  letter-spacing: 2px;
 }
 @font-face {
   font-family: "teacher";
-  src: url("/Teacher-Vintage.otf");
+  src: url("/fonts/Teacher-Vintage.otf");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "canada";
-  src: url("/canada.otf");
+  src: url("/fonts/canada.otf");
+  font-weight: 400;
+  font-style: normal;
+  text-transform: none;
+}
+@font-face {
+  font-family: "LTR";
+  src: url("/fonts/LTRenovate-Reg.otf");
   font-weight: 400;
   font-style: normal;
   text-transform: none;
@@ -50,8 +64,7 @@
 
 body {
   background-color: #f1faee;
-  font-family: "canada";
-  cursor: url("/cursor.png") 10 10, auto;
+  font-family: "LTR", sans-serif;
 }
 
 a {
@@ -68,10 +81,4 @@ a {
   border: 1px solid var(--white);
   -webkit-border-radius: 20px;
   border-radius: 20px;
-}
-
-@media (max-width: 850px) {
-  body {
-    cursor: auto;
-  }
 }

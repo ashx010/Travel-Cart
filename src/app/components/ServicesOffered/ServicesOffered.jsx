@@ -1,8 +1,7 @@
-"use client";
 import React from "react";
 import "./ServicesOffered.css";
-import { useEffect, useState } from "react";
 import Ncard from "../Card/Ncard.jsx";
+import { useState, useEffect } from "react";
 
 export default function ServicesOffered({
   Services = [
@@ -30,46 +29,54 @@ export default function ServicesOffered({
     },
   ],
 }) {
+  useEffect(() => {
+    Services.map((service, index) => {
+      if (service.before) {
+        const style = document.createElement("style");
+        style.innerHTML = `
+          .card-header-servicesOffered.card-${index + 1}:hover::before {
+            background: url(${service.before});
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 1;
+          }
+        `;
+        document.head.appendChild(style);
+      }
+      if (service.after) {
+        const style = document.createElement("style");
+        style.innerHTML = `
+          .card-header-servicesOffered.card-${index + 1}:hover::after {
+            background: url(${service.after});
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 1;
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    });
+  }, [Services]);
 
   return (
     <>
       <h2 className="title-servicesOffered">Services</h2>
       <div className="services-offered-list">
         {Services.map((service, index) => (
-          <div key={index}>
-            <style>
-              {service.before &&
-                `
-                .card-header-servicesOffered.card-${index + 1}:hover::before {
-                  background: url(${service.before});
-                  background-size: cover;
-                  background-position: center;
-                  background-repeat: no-repeat;
-                }
-              `}
-              {service.after &&
-                `
-                .card-header-servicesOffered.card-${index + 1}:hover::after {
-                  background: url(${service.after});
-                  background-size: cover;
-                  background-position: center;
-                  background-repeat: no-repeat;
-                }
-              `}
-            </style>
-            <Ncard
-              key={index}
-              imgSrc={service.imgSrc}
-              imgAlt={service.name}
-              cardBodyHeading={service.name}
-              cardContainerClass={["card-container-servicesOffered"]}
-              cardHeaderClass={[
-                "card-header-servicesOffered card-" + (index + 1),
-              ]}
-              cardImageClass={["card-image-servicesOffered"]}
-              cardBodyHeaderClass={["card-body-heading-servicesOffered"]}
-            />
-          </div>
+          <Ncard
+            key={index}
+            imgSrc={service.imgSrc}
+            imgAlt={service.name}
+            cardBodyHeading={service.name}
+            cardContainerClass={["card-container-servicesOffered"]}
+            cardHeaderClass={[
+              "card-header-servicesOffered card-" + (index + 1),
+            ]}
+            cardImageClass={["card-image-servicesOffered"]}
+            cardBodyHeaderClass={["card-body-heading-servicesOffered"]}
+          />
         ))}
       </div>
     </>

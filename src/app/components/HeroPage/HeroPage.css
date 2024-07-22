@@ -1,18 +1,34 @@
 .hero-container {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
   margin: 0;
   border-radius: 1em;
   padding: 0;
-  padding-top: 2rem;
+  padding-top: 8px;
   padding-bottom: 0;
   flex-direction: row;
   width: 100%;
   height: 100vh;
   background-color: #f1faee;
   position: relative;
+}
+
+.hero-container .title {
+  color: #1D3557;
+  font-family: "font2";
+  text-transform: uppercase;
+  text-shadow: 0px 0px 1px white;
+  writing-mode: vertical-lr;
+  text-orientation: sideways;
+  rotate: 180deg;
+  font-size: calc(2em + 1vw + 3vh);
+  letter-spacing: 20px;
+  border: none;
+  padding:0;
+  padding-bottom: 10vh;
+  font-weight: 600;
 }
 
 .text-container {
@@ -26,14 +42,13 @@
   min-width: 35%;
   height: auto;
   position: absolute;
-  top: 10%;
-  left: 10%;
+  top: 5%;
+  left: 12%;
   font-family: "font3";
   font-size: 5em;
   color: #f1faee;
   text-shadow: 1px 1px 0 black;
   text-transform: uppercase;
-  backdrop-filter: blur(2px);
   transition: all 1s ease-in-out;
   z-index: 10;
 }
@@ -89,13 +104,12 @@
 
 .image-container {
   width: 90%;
-  height: 90vh;
+  height: 97vh;
   display: flex;
   transition: all 1s ease-in-out;
   justify-content: flex-end;
   align-items: flex-end;
   border-radius: 1rem;
-  margin-right: 2em;
   position: relative;
   overflow: hidden;
   filter: drop-shadow(-10px 10px 0 #f1faee);
@@ -105,7 +119,7 @@
   content: " ";
   position: absolute;
   bottom: 0px;
-  left: 39%;
+  left: 37.5%;
   border-radius: 50%;
   width: 5%;
   box-shadow: -2rem 2rem 0 #f1faee;
@@ -117,7 +131,7 @@
 .image-container::before {
   content: " ";
   position: absolute;
-  bottom: 22%;
+  bottom: 21.2%;
   left: 0%;
   border-radius: 50%;
   width: 5%;
@@ -150,13 +164,15 @@
 .card-place-image-hero {
   width: 13rem !important;
   padding: 2% !important;
+  max-width: unset !important;
 }
 
 .card-place-heading-hero {
   font-size: 1.1em !important;
   writing-mode: vertical-rl !important;
-  text-orientation: upright !important;
+  text-orientation: sideways !important;
   font-family: "font2" !important;
+  letter-spacing: 10px !important;
 }
 
 .text-container .city {
@@ -168,28 +184,6 @@
   align-items: center;
 }
 
-.city .explore-button {
-  padding: 0.1em 1em;
-  min-width: 10em;
-  box-shadow: 1px 1px 5px #1d3557;
-  text-transform: none;
-  border-radius: 5px;
-  border: none;
-  background-color: #a8dadc;
-  color: #1d3557;
-  font-size: 0.3em;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  text-transform: uppercase;
-  cursor: url("/pointer.png"), auto;
-}
-
-.city .explore-button:hover {
-  border: 0.1em dashed #a8dadc;
-  background-color: #457b9d;
-  padding: 0em 0.5em;
-  color: #f1faee;
-}
-
 .subscribe-container-hero-main {
   width: 100%;
   display: flex;
@@ -198,30 +192,12 @@
   flex-direction: row;
 }
 
-input.subscribe-input-hero {
-  width: 70%;
+.subscribe-input-hero {
+  width: 65%;
   padding: 0.5em 1em;
   border-radius: 5px;
   border: none;
   background-color: #f1faee;
-  color: #1d3557;
-  cursor: url("/write.png") 16 30, auto;
-}
-
-button.subscribe-button-hero {
-  width: auto;
-  padding: 0.5em 1em;
-  border-radius: 5px;
-  border: none;
-  background-color: #1d3557;
-  color: #f1faee;
-  cursor: url("/pointer.png"), auto;
-}
-
-button.subscribe-button-hero:hover {
-  border: 0.3em dashed #1d3557;
-  background-color: #a8dadc;
-  padding: 0.2em 0.7em;
   color: #1d3557;
 }
 
@@ -233,16 +209,16 @@ button.subscribe-button-hero:hover {
 
 @media (max-width: 1510px) {
   .image-container::before {
-    bottom: 18.8%;
+    bottom: 18.4%;
   }
 }
 
 @media (max-width: 1280px) {
   .image-container::after {
-    left: 39.7%;
+    left: 37.5%;
   }
   .image-container::before {
-    bottom: 19.4%;
+    bottom: 18.9%;
   }
 }
 
@@ -260,11 +236,11 @@ button.subscribe-button-hero:hover {
 
 @media (max-width: 1024px) {
   .image-container::after {
-    left: 51.9%;
+    left: 48.5%;
     box-shadow: -1rem 1rem 0 #f1faee;
   }
   .image-container::before {
-    bottom: 19%;
+    bottom: 18.5%;
     box-shadow: -1rem 1rem 0 #f1faee;
   }
   .text-container {
@@ -282,14 +258,22 @@ button.subscribe-button-hero:hover {
     justify-content: flex-start;
     align-items: center;
     flex-wrap: nowrap;
-    padding: 1rem;
-    padding-top: 3rem;
+    padding: 0;
     flex-direction: column;
     overflow: hidden;
+    border-radius: 0;
   }
 
-  button.subscribe-button-hero, button.subscribe-button-hero:hover , .city .explore-button, .city .explore-button:hover {
-    cursor: auto;
+  .hero-container .title{
+    position: absolute;
+    z-index: 10;
+    left: 1%;
+    top: 30%;
+    letter-spacing: 5px;
+    color: #f1faee;
+    font-weight: 400;
+    padding-bottom: 0;
+    font-size: calc(1rem + 1vw + 2vh);
   }
 
   .image-container {
@@ -298,6 +282,7 @@ button.subscribe-button-hero:hover {
     transition: all 1s ease-in-out;
     flex-direction: column;
     margin: 0;
+    border-radius: 0 0 1em 1em;
   }
 
   .image-container::after {
@@ -321,8 +306,8 @@ button.subscribe-button-hero:hover {
 
   .text-container-main {
     padding: 5%;
-    width: 95%;
-    border-radius: 1em / 15%;
+    width: 100%;
+    border-radius: 0;
     position: unset;
     top: unset;
     left: unset;
@@ -371,6 +356,17 @@ button.subscribe-button-hero:hover {
 }
 
 @media (max-width: 500px) {
+
+  .hero-container .title{
+    position: absolute;
+    z-index: 10;
+    left: 1%;
+    top: 25%;
+    letter-spacing: 5px;
+    color: #f1faee;
+    font-weight: 400;
+  }
+
   .text-container {
     font-size: 3em;
     backdrop-filter: blur(1px);
@@ -385,17 +381,8 @@ button.subscribe-button-hero:hover {
     gap: 1em;
   }
 
-  input.subscribe-input-hero {
+  .subscribe-input-hero {
     width: 100%;
     padding: 0.3em 0.8em;
-  }
-
-  button.subscribe-button-hero {
-    padding: 0.3em 0.8em;
-  }
-
-  button.subscribe-button-hero:hover {
-    padding: 0.1em 0.6em;
-    border: 0.2em dashed #457b9d;
   }
 }
