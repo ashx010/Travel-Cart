@@ -1,7 +1,10 @@
+"use client";
 import React from "react";
-import "./ServicesOffered.css";
+import style from "./ServicesOffered.module.css";
 import Ncard from "../Card/Ncard.jsx";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { font2 } from "../../fonts.js";
+import classNames from "classnames";
 
 export default function ServicesOffered({
   Services = [
@@ -62,20 +65,20 @@ export default function ServicesOffered({
 
   return (
     <>
-      <h2 className="title-servicesOffered">Services</h2>
-      <div className="services-offered-list">
+      <h2 className={classNames(style["title-servicesOffered"], font2.className)}>Services</h2>
+      <div className={style["services-offered-list"]}>
         {Services.map((service, index) => (
           <Ncard
             key={index}
             imgSrc={service.imgSrc}
             imgAlt={service.name}
             cardBodyHeading={service.name}
-            cardContainerClass={["card-container-servicesOffered"]}
-            cardHeaderClass={[
-              "card-header-servicesOffered card-" + (index + 1),
+            cardContainerClass={style["card-container-servicesOffered"]}
+            cardHeaderClass={style[
+              "card-header-servicesOffered", `card-${(index + 1)}`
             ]}
-            cardImageClass={["card-image-servicesOffered"]}
-            cardBodyHeaderClass={["card-body-heading-servicesOffered"]}
+            cardImageClass={style["card-image-servicesOffered"]}
+            cardBodyHeaderClass={style["card-body-heading-servicesOffered"]}
           />
         ))}
       </div>

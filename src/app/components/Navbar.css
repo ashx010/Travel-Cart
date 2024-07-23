@@ -25,7 +25,7 @@ ul.navbar-links-c {
   margin: 0;
   color: rgb(0, 0, 0);
   align-items: center;
-  font-family: "LTR";
+  font-family: var(--LTR);
 }
 
 .navbar-c li {

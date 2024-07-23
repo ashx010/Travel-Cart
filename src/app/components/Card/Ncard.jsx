@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import "./Ncard.css";
-import { useState, useEffect, useRef } from "react";
+import style from "./Ncard.module.css";
+import { useEffect, useRef } from "react";
+import { LTR, canada} from "../../fonts.js";
 
 export default function Ncard({
   imgSrc = "",
@@ -86,16 +88,16 @@ export default function Ncard({
       ref={cref}
       id={cardContainerId}
       style={{ ...cardContainerStyle}}
-      className={classNames("cardParent", cardContainerClass)}
+      className={classNames(style["cardParent"], cardContainerClass)}
     >
       {(cardHeaderClass || cardHeaderStyle || imgSrc) && (
         <div
           style={cardHeaderStyle}
-          className={classNames("cardHeader", cardHeaderClass)}
+          className={classNames(style["cardHeader"], cardHeaderClass)}
         >
           {imgSrc && (
             <img
-              className={classNames("cardHeaderImg", cardImageClass)}
+              className={classNames(style["cardHeaderImg"], cardImageClass)}
               style={cardImageStyle}
               src={imgSrc}
               alt={imgAlt}
@@ -106,7 +108,7 @@ export default function Ncard({
       {cardBodyHeading && (
         <div
           style={cardBodyHeaderStyle}
-          className={classNames("cardBodyHeader", cardBodyHeaderClass)}
+          className={classNames(style["cardBodyHeader"], canada.className, cardBodyHeaderClass)}
         >
           {cardBodyHeading}
         </div>
@@ -114,7 +116,7 @@ export default function Ncard({
       {cardBodyDesc && (
         <div
           style={cardBodyDescStyle}
-          className={classNames("cardBodyDesc", cardBodyDescClass)}
+          className={classNames(style["cardBodyDesc"], LTR.className, cardBodyDescClass)}
         >
           {cardBodyDesc}
         </div>
@@ -122,7 +124,7 @@ export default function Ncard({
       {cardFooter && (
         <div
           style={cardFooterStyle}
-          className={classNames("cardFooter", cardFooterClass)}
+          className={classNames(style["cardFooter"], cardFooterClass)}
         >
           {cardFooter}
         </div>

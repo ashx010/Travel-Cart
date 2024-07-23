@@ -3,22 +3,14 @@ import style from "./Featured.module.css";
 import Ncard from "../Card/Ncard";
 import { dummy_data } from "./featured_dummy_data.js";
 import Rating from "@mui/material/Rating";
-import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import { styled } from "@mui/material/styles";
-
-const FeaturedButton = styled(Button)({
-  color: "#f1faee",
-  backgroundColor: "#1d3557",
-  "&:hover": {
-    backgroundColor: "#a8dadc",
-    color: "#1d3557",
-  },
-});
+import { font2, LTR } from "../../fonts.js";
+import classNames from "classnames";
+import { ButtonStyle1 } from "../all/styledButtons.jsx";
 
 export default function Featured() {
   return (
-    <div className={style["featured-container"]}>
+    <div className={classNames(style["featured-container"], font2.variable)}>
       <h2 className={style["title-featured"]}>Featured</h2>
       {dummy_data.map((data) => (
         <Ncard
@@ -49,13 +41,14 @@ export default function Featured() {
               <p className={style["card-body-item6"]}>{data.vendor.contact}</p>
               <div className={style["card-body-dsc-infoot"]}>
                 <p className={style["card-body-item7"]}>
-                  <FeaturedButton
+                  <ButtonStyle1
+                    className={LTR.className}
                     variant="contained"
                     size="small"
                     endIcon={<SendIcon />}
                   >
                     {data.cost}
-                  </FeaturedButton>
+                  </ButtonStyle1>
                 </p>
                 <p className={style["card-body-item8"]}>
                   {data.rating}{" "}

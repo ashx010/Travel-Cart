@@ -1,17 +1,19 @@
 "use client";
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
-import "./HeroPage.css";
+import style from "./HeroPage.module.css";
 import Ncard from "../Card/Ncard";
 import Button from "@mui/material/Button";
 import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import { styled } from '@mui/material/styles';
+import { LTR, canada, font2, font3 } from "../../fonts.js" 
+import classNames from "classnames";
 
 const SearchButton = styled(Button)({
   color: "#f1faee",
   backgroundColor: "#1d3557",
-  fontFamily: "LTR",
+  fontFamily: LTR.style.fontFamily,
   border: "none",
   "&:hover": {
     backgroundColor: "#a8dadc",
@@ -22,7 +24,7 @@ const SearchButton = styled(Button)({
 const ExploreButton = styled(Button)({
   color: "#1d3557",
   backgroundColor: "#a8dadc",
-  fontFamily: "LTR",
+  fontFamily: LTR.style.fontFamily,
   "&:hover": {
     backgroundColor: "#457b9d",
     color: "#f1faee",
@@ -31,7 +33,7 @@ const ExploreButton = styled(Button)({
 
 export default function HeroPage({
   titleName = "Scripet",
-  heroPageTitle = "TBOOK",
+  heroPageTitle = "TCART",
   heroPageSubTitle = `"Explore the World's Wonders - Tailored Just for You"`,
   imgSrcList = [
     {
@@ -120,11 +122,11 @@ export default function HeroPage({
   });
 
   return (
-    <div className="hero-container">
-      <div className="title">{titleName}</div>
-      <div className="text-container">
+    <div className={style["hero-container"]}>
+      <div className={classNames(style["title"], font2.className)}>{titleName}</div>
+      <div className={classNames(style["text-container"], font3.className)}>
         {currImgSrcList[0].name}
-        <div className="city">
+        <div className={style["city"]}>
           <ExploreButton
             variant="contained"
             size="small"
@@ -135,7 +137,7 @@ export default function HeroPage({
         </div>
       </div>
       <div
-        className="image-container"
+        className={style["image-container"]}
         style={{
           background: `url(${currImgSrcList[0].src}) no-repeat center / cover`,
           transform: !responsiveCond ? translateMainProp : "none",
@@ -143,16 +145,16 @@ export default function HeroPage({
       >
         {responsiveCond && (
           <div
-            className="place-list-view-container"
+            className={style["place-list-view-container"]}
             id="placeListViewContainer"
           >
             <Ncard
               imgSrc={currImgSrcList[0].src}
               imgAlt={currImgSrcList[0].name}
               cardBodyHeading={currImgSrcList[0].name}
-              cardContainerClass={["card-place-container-hero"]}
-              cardImageClass={["card-place-image-hero"]}
-              cardBodyHeaderClass={["card-place-heading-hero"]}
+              cardContainerClass={style["card-place-container-hero"]}
+              cardImageClass={style["card-place-image-hero"]}
+              cardBodyHeaderClass={classNames(style["card-place-heading-hero"], font2.className)}
               cardContainerStyle={{
                 backgroundColor: currImgSrcList[0].color,
                 transform: "translate(6%, -12%)",
@@ -163,9 +165,9 @@ export default function HeroPage({
               imgSrc={currImgSrcList[2].src}
               imgAlt={currImgSrcList[2].name}
               cardBodyHeading={currImgSrcList[2].name}
-              cardContainerClass={["card-place-container-hero"]}
-              cardImageClass={["card-place-image-hero"]}
-              cardBodyHeaderClass={["card-place-heading-hero"]}
+              cardContainerClass={style["card-place-container-hero"]}
+              cardImageClass={style["card-place-image-hero"]}
+              cardBodyHeaderClass={classNames(style["card-place-heading-hero"], font2.className)}
               cardContainerStyle={{
                 backgroundColor: currImgSrcList[2].color,
                 transform: cardTwoStyleHover,
@@ -176,9 +178,9 @@ export default function HeroPage({
               imgSrc={currImgSrcList[1].src}
               imgAlt={currImgSrcList[1].name}
               cardBodyHeading={currImgSrcList[1].name}
-              cardContainerClass={["card-place-container-hero"]}
-              cardImageClass={["card-place-image-hero"]}
-              cardBodyHeaderClass={["card-place-heading-hero"]}
+              cardContainerClass={style["card-place-container-hero"]}
+              cardImageClass={style["card-place-image-hero"]}
+              cardBodyHeaderClass={classNames(style["card-place-heading-hero"], font2.className)}
               cardContainerStyle={{
                 backgroundColor: currImgSrcList[1].color,
                 transform: translateYProp,
@@ -190,12 +192,12 @@ export default function HeroPage({
       </div>
 
       {!responsiveCond && (
-        <div className="place-list-view-container" id="placeListViewContainer">
+        <div className={style["place-list-view-container"]} id="placeListViewContainer">
           <Ncard
             imgSrc={currImgSrcList[1].src}
             imgAlt={currImgSrcList[1].name}
-            cardContainerClass={["card-place-container-hero"]}
-            cardImageClass={["card-place-image-hero"]}
+            cardContainerClass={style["card-place-container-hero"]}
+            cardImageClass={style["card-place-image-hero"]}
             cardContainerStyle={{
               backgroundColor: currImgSrcList[1].color,
               transform: translateYProp,
@@ -204,8 +206,8 @@ export default function HeroPage({
           <Ncard
             imgSrc={currImgSrcList[2].src}
             imgAlt={currImgSrcList[2].name}
-            cardContainerClass={["card-place-container-hero"]}
-            cardImageClass={["card-place-image-hero"]}
+            cardContainerClass={style["card-place-container-hero"]}
+            cardImageClass={style["card-place-image-hero"]}
             cardContainerStyle={{
               backgroundColor: currImgSrcList[2].color,
               transform: translateXProp,
@@ -214,8 +216,8 @@ export default function HeroPage({
           <Ncard
             imgSrc={currImgSrcList[0].src}
             imgAlt={currImgSrcList[0].name}
-            cardContainerClass={["card-place-container-hero"]}
-            cardImageClass={["card-place-image-hero"]}
+            cardContainerClass={style["card-place-container-hero"]}
+            cardImageClass={style["card-place-image-hero"]}
             cardContainerStyle={{
               backgroundColor: currImgSrcList[0].color,
               transform: translateXProp,
@@ -224,16 +226,16 @@ export default function HeroPage({
         </div>
       )}
       {heroPageTitle && (
-        <div className="text-container-main">
-          <h1 className="heading-hero">{heroPageTitle}</h1>
+        <div className={style["text-container-main"]}>
+          <h1 className={classNames(style["heading-hero"], font2.className)}>{heroPageTitle}</h1>
           {heroPageSubTitle && (
-            <p className="sub-heading-hero">{heroPageSubTitle}</p>
+            <p className={classNames(style["sub-heading-hero"], canada.className)}>{heroPageSubTitle}</p>
           )}
-          <div className="subscribe-container-hero-main">
+          <div className={style["subscribe-container-hero-main"]}>
             <input
               type="text"
               name="email-hero-subscriber"
-              className="subscribe-input-hero"
+              className={style["subscribe-input-hero"]}
               placeholder="Enter Destination"
             />
             <SearchButton

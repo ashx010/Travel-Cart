@@ -12,7 +12,6 @@
   text-align: end;
   padding: 3% 10%;
   text-transform: uppercase;
-  font-family: "font2";
   color: #1d3557;
 }
 
@@ -205,8 +204,6 @@
     width: 100%;
     text-align: start;
     padding: 5% 5%;
-    text-transform: uppercase;
-    font-family: "font2";
   }
   .services-offered-list {
     justify-content: flex-start;

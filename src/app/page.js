@@ -1,4 +1,3 @@
-"use client";
 import Navbar from "./components/Navbar";
 import HeroPage from "./components/HeroPage/HeroPage.jsx";
 import Featured from "./components/Featured/Featured.jsx";
@@ -19,3 +18,6 @@ export default function Home() {
     </main>
   );
 }
+
+//className={style["$1"]}
+// className="([^"]+)"

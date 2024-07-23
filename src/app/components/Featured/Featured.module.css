@@ -4,7 +4,7 @@
   text-align: start;
   padding: 0;
   text-transform: uppercase;
-  font-family: "font2";
+  font-family: var(--font2);
   color: #1d3557;
 }
 
@@ -60,7 +60,7 @@
 .card-body-item1 {
   font-size: 1.2em;
   font-weight: 600;
-  font-variant: "small-caps";
+  font-variant: small-caps;
 }
 
 .card-body-item2 {
