@@ -6,7 +6,7 @@ export default function Navbar({
   link1 = "Home",
   link2 = "About",
   link3 = "Contact",
-  link4 = "Login",
+  link4 = "Profile",
 }) {
   return (
     <nav className="navbar-c">

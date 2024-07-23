@@ -3,33 +3,11 @@ import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import style from "./HeroPage.module.css";
 import Ncard from "../Card/Ncard";
-import Button from "@mui/material/Button";
 import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import { styled } from '@mui/material/styles';
-import { LTR, canada, font2, font3 } from "../../fonts.js" 
+import { canada, font2, font3 } from "../../fonts.js" 
 import classNames from "classnames";
-
-const SearchButton = styled(Button)({
-  color: "#f1faee",
-  backgroundColor: "#1d3557",
-  fontFamily: LTR.style.fontFamily,
-  border: "none",
-  "&:hover": {
-    backgroundColor: "#a8dadc",
-    color: "#1d3557",
-  },
-});
-
-const ExploreButton = styled(Button)({
-  color: "#1d3557",
-  backgroundColor: "#a8dadc",
-  fontFamily: LTR.style.fontFamily,
-  "&:hover": {
-    backgroundColor: "#457b9d",
-    color: "#f1faee",
-  },
-});
+import { ButtonStyle1, ButtonStyle2 } from "../all/styledButtons";
 
 export default function HeroPage({
   titleName = "Scripet",
@@ -127,13 +105,13 @@ export default function HeroPage({
       <div className={classNames(style["text-container"], font3.className)}>
         {currImgSrcList[0].name}
         <div className={style["city"]}>
-          <ExploreButton
+          <ButtonStyle2
             variant="contained"
             size="small"
             endIcon={<TravelExploreIcon />}
           >
             {currImgSrcList[0].city}
-          </ExploreButton>
+          </ButtonStyle2>
         </div>
       </div>
       <div
@@ -238,16 +216,23 @@ export default function HeroPage({
               className={style["subscribe-input-hero"]}
               placeholder="Enter Destination"
             />
-            <SearchButton
+            <ButtonStyle1
               variant="contained"
               size="medium"
               endIcon={<ModeOfTravelIcon />}
             >
               Search
-            </SearchButton>
+            </ButtonStyle1>
           </div>
         </div>
       )}
     </div>
   );
 }
+
+HeroPage.propTypes = {
+  titleName: PropTypes.string,
+  heroPageTitle: PropTypes.string,
+  heroPageSubTitle: PropTypes.string,
+  imgSrcList: PropTypes.array,
+};

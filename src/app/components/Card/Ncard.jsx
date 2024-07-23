@@ -134,15 +134,15 @@ export default function Ncard({
           ref={torchRef}
           style={{
             position: 'absolute',
-            width: '150px',
-            height: '150px',
-            // background: 'radial-gradient(circle, #457B9Daa 0%, rgba(255,255,255,0) 100%)',
-            background: "radial-gradient(circle, rgba(69,123,157,0.7), rgba(69,123,157,0) 80%)",
+            width: '100%',
+            aspectRatio: 1,
+            background: "radial-gradient(circle, rgba(168, 218, 220, 0.7) 0%, rgba(168, 218, 220, 0) 70%)",
             pointerEvents: 'none',
             borderRadius: '50%',
             transform: 'translate(-50%, -50%)',
             transition: 'opacity 0.3s',
             opacity: 0,
+            zIndex: -1,
           }}
         />
       )}

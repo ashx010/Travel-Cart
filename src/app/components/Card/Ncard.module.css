@@ -20,7 +20,6 @@
     font-size: 1.2em;
     font-weight: bold;
     text-transform: uppercase;
-    font-family: "canada";
     width: 100%;
     text-align: center;
 }
@@ -28,7 +27,6 @@
 .cardBodyDesc{
     font-size: 1em;
     padding: 1% 10%;
-    font-family: "LTR";
     width: 100%;
     text-align: start;
 }
