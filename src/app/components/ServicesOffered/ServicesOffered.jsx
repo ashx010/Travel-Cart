@@ -35,9 +35,11 @@ export default function ServicesOffered({
   useEffect(() => {
     Services.map((service, index) => {
       if (service.before) {
-        const style = document.createElement("style");
-        style.innerHTML = `
-          .card-header-servicesOffered.card-${index + 1}:hover::before {
+        const new_style = document.createElement("style");
+        new_style.innerHTML = `
+          .${style["card-header-servicesOffered"]}.${
+          style[`card-${index + 1}`]
+        }:hover::before {
             background: url(${service.before});
             background-size: cover;
             background-position: center;
@@ -45,12 +47,14 @@ export default function ServicesOffered({
             opacity: 1;
           }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(new_style);
       }
       if (service.after) {
-        const style = document.createElement("style");
-        style.innerHTML = `
-          .card-header-servicesOffered.card-${index + 1}:hover::after {
+        const new_style = document.createElement("style");
+        new_style.innerHTML = `
+          .${style["card-header-servicesOffered"]}.${
+          style[`card-${index + 1}`]
+        }:hover::after {
             background: url(${service.after});
             background-size: cover;
             background-position: center;
@@ -58,14 +62,18 @@ export default function ServicesOffered({
             opacity: 1;
           }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(new_style);
       }
     });
   }, [Services]);
 
   return (
     <>
-      <h2 className={classNames(style["title-servicesOffered"], font2.className)}>Services</h2>
+      <h2
+        className={classNames(style["title-servicesOffered"], font2.className)}
+      >
+        Services
+      </h2>
       <div className={style["services-offered-list"]}>
         {Services.map((service, index) => (
           <Ncard
@@ -74,9 +82,10 @@ export default function ServicesOffered({
             imgAlt={service.name}
             cardBodyHeading={service.name}
             cardContainerClass={style["card-container-servicesOffered"]}
-            cardHeaderClass={style[
-              "card-header-servicesOffered", `card-${(index + 1)}`
-            ]}
+            cardHeaderClass={classNames(
+              style["card-header-servicesOffered"],
+              style[`card-${index + 1}`]
+            )}
             cardImageClass={style["card-image-servicesOffered"]}
             cardBodyHeaderClass={style["card-body-heading-servicesOffered"]}
           />
