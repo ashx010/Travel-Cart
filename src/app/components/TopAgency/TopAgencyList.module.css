@@ -1,0 +1,19 @@
+.top-agency-container {
+  box-shadow: none;
+  width: 90%;
+  margin: 3% 5%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+
+.title-topAgency {
+  font-size: 5em;
+  width: 100%;
+  text-align: start;
+  padding: 0;
+  text-transform: uppercase;
+  color: #1d3557;
+}
