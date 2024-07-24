@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import style from "./Ncard.module.css";
 import { useEffect, useRef } from "react";
-import { LTR, canada} from "../../fonts.js";
+import { LTR, canada } from "../../fonts.js";
+import Image from "next/image";
 
 export default function Ncard({
   imgSrc = "",
@@ -14,19 +15,25 @@ export default function Ncard({
   cardFooter = "",
   cardContainerClass = "",
   cardHeaderClass = "",
-  cardImageClass = "",
   cardBodyHeaderClass = "",
   cardBodyDescClass = "",
   cardFooterClass = "",
   cardContainerStyle = {},
   cardHeaderStyle = {},
-  cardImageStyle = {},
+  cardImageClass = "",
   cardBodyHeaderStyle = {},
   cardBodyDescStyle = {},
   cardFooterStyle = {},
   cardContainerId = "",
+  cardImageSizes = "33vw",
   apply3dEffect = false,
-  applyTorchEffect = false
+  applyTorchEffect = false,
+  applyImgHover1Class = "",
+  applyImgHover2Class = "",
+  applyImgHover1ImgSrc = "",
+  applyImgHover2ImgSrc = "",
+  applyImgHover1Sizes = "33vw",
+  applyImgHover2Sizes = "33vw",
 }) {
   const cref = useRef(null);
   const torchRef = useRef(null);
@@ -41,42 +48,46 @@ export default function Ncard({
         const cardRect = cref.current.getBoundingClientRect();
         const x = e.clientX - (cardRect.left + cardRect.width / 2);
         const y = e.clientY - (cardRect.top + cardRect.height / 2);
-        const rotateX = y / (cardRect.height/2) * 5;
-        const rotateY = x / (cardRect.width/2) * 10;
+        const rotateX = (y / (cardRect.height / 2)) * 5;
+        const rotateY = (x / (cardRect.width / 2)) * 10;
         cref.current.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) perspective(700px)`;
       }
-      if(applyTorchEffect && torchRef.current){
+      if (applyTorchEffect && torchRef.current) {
         const torchRect = cref.current.getBoundingClientRect();
         const x = e.clientX - torchRect.left;
         const y = e.clientY - torchRect.top;
         torchRef.current.style.top = `${y}px`;
-        torchRef.current.style.left = `${x}px`;    
+        torchRef.current.style.left = `${x}px`;
       }
     };
     const handleMouseLeave = () => {
-      if(apply3dEffect){
+      if (apply3dEffect) {
         cref.current.style.transform = `rotateX(0deg) rotateY(0deg) perspective(700px)`;
       }
-      if(applyTorchEffect){
+      if (applyTorchEffect) {
         torchRef.current.style.opacity = "0";
       }
     };
 
     const handleMouseEnter = () => {
-      if(applyTorchEffect && torchRef.current){
-        torchRef.current.style.opacity = '1';
+      if (applyTorchEffect && torchRef.current) {
+        torchRef.current.style.opacity = "1";
       }
     };
 
     if (cref.current) {
-      cref.current.addEventListener("mouseenter", handleMouseEnter);
+      if(torchRef.current) {
+        cref.current.addEventListener("mouseenter", handleMouseEnter);
+      }
       cref.current.addEventListener("mousemove", handleMouseMove);
       cref.current.addEventListener("mouseleave", handleMouseLeave);
     }
 
     return () => {
       if (cref.current) {
-        cref.current.removeEventListener('mouseenter', handleMouseEnter);
+        if(torchRef.current) {
+          cref.current.removeEventListener("mouseenter", handleMouseEnter);
+        }
         cref.current.removeEventListener("mousemove", handleMouseMove);
         cref.current.removeEventListener("mouseleave", handleMouseLeave);
       }
@@ -87,7 +98,7 @@ export default function Ncard({
     <div
       ref={cref}
       id={cardContainerId}
-      style={{ ...cardContainerStyle}}
+      style={{ ...cardContainerStyle }}
       className={classNames(style["cardParent"], cardContainerClass)}
     >
       {(cardHeaderClass || cardHeaderStyle || imgSrc) && (
@@ -95,20 +106,51 @@ export default function Ncard({
           style={cardHeaderStyle}
           className={classNames(style["cardHeader"], cardHeaderClass)}
         >
+          {applyImgHover1Class && (
+            <div className={classNames(style["imgHoverEffect1"], ...applyImgHover1Class)}>
+              <Image
+                src={applyImgHover1ImgSrc}
+                alt="image-hover-1"
+                fill={true}
+                style={{objectFit: "cover", objectPosition: "center"}}
+                sizes={applyImgHover1Sizes}
+                priority={false}
+              />
+            </div>
+          )}
           {imgSrc && (
-            <img
-              className={classNames(style["cardHeaderImg"], cardImageClass)}
-              style={cardImageStyle}
+            <Image
               src={imgSrc}
               alt={imgAlt}
+              fill={true}
+              sizes={cardImageSizes}
+              style={{objectFit: "cover", objectPosition: "center"}}
+              className={classNames(style["cardImage"], cardImageClass)}
+              priority={false}
             />
+          )}
+          {applyImgHover2Class && (
+            <div className={classNames(style["imgHoverEffect2"], applyImgHover2Class)}>
+              <Image
+                src={applyImgHover2ImgSrc}
+                alt="image-hover-2"
+                fill={true}
+                sizes={applyImgHover2Sizes}
+                style={{objectFit: "cover", objectPosition: "center"}}
+                priority={false}
+              />
+            </div>
           )}
         </div>
       )}
       {cardBodyHeading && (
         <div
           style={cardBodyHeaderStyle}
-          className={classNames(style["cardBodyHeader"], canada.className, cardBodyHeaderClass)}
+          className={classNames(
+            style["cardBodyHeader"],
+            canada.className,
+            cardBodyHeaderClass
+          )}
         >
           {cardBodyHeading}
         </div>
@@ -116,7 +158,11 @@ export default function Ncard({
       {cardBodyDesc && (
         <div
           style={cardBodyDescStyle}
-          className={classNames(style["cardBodyDesc"], LTR.className, cardBodyDescClass)}
+          className={classNames(
+            style["cardBodyDesc"],
+            LTR.className,
+            cardBodyDescClass
+          )}
         >
           {cardBodyDesc}
         </div>
@@ -133,14 +179,15 @@ export default function Ncard({
         <div
           ref={torchRef}
           style={{
-            position: 'absolute',
-            width: '100%',
+            position: "absolute",
+            width: "100%",
             aspectRatio: 1,
-            background: "radial-gradient(circle, rgba(168, 218, 220, 0.7) 0%, rgba(168, 218, 220, 0) 70%)",
-            pointerEvents: 'none',
-            borderRadius: '50%',
-            transform: 'translate(-50%, -50%)',
-            transition: 'opacity 0.3s',
+            background:
+              "radial-gradient(circle, rgba(168, 218, 220, 0.7) 0%, rgba(168, 218, 220, 0) 70%)",
+            pointerEvents: "none",
+            borderRadius: "50%",
+            transform: "translate(-50%, -50%)",
+            transition: "opacity 0.3s",
             opacity: 0,
             zIndex: -1,
           }}
@@ -155,18 +202,24 @@ Ncard.propTypes = {
   imgSrc: PropTypes.string,
   imgAlt: PropTypes.string,
   cardBodyHeading: PropTypes.node || PropTypes.string,
-  cardBodyDesc: PropTypes.node || PropTypes.string,
+  cardBodyDesc: PropTypes.any,
   cardFooter: PropTypes.node || PropTypes.string,
   cardContainerClass: PropTypes.string || PropTypes.arrayOf(PropTypes.string),
   cardHeaderClass: PropTypes.string || PropTypes.arrayOf(PropTypes.string),
-  cardImageClass: PropTypes.string || PropTypes.arrayOf(PropTypes.string),
   cardBodyHeaderClass: PropTypes.string || PropTypes.arrayOf(PropTypes.string),
   cardBodyDescClass: PropTypes.string || PropTypes.arrayOf(PropTypes.string),
   cardFooterClass: PropTypes.string || PropTypes.arrayOf(PropTypes.string),
   cardContainerStyle: PropTypes.object,
   cardHeaderStyle: PropTypes.object,
-  cardImageStyle: PropTypes.object,
   cardBodyHeaderStyle: PropTypes.object,
+  cardImageClass: PropTypes.string || PropTypes.arrayOf(PropTypes.string),
   cardBodyDescStyle: PropTypes.object,
   cardFooterStyle: PropTypes.object,
+  cardContainerId: PropTypes.string,
+  apply3dEffect: PropTypes.bool,
+  applyTorchEffect: PropTypes.bool,
+  applyImgHover1Class: PropTypes.string || PropTypes.arrayOf(PropTypes.string),
+  applyImgHover2Class: PropTypes.string || PropTypes.arrayOf(PropTypes.string),
+  applyImgHover1ImgSrc: PropTypes.string,
+  applyImgHover2ImgSrc: PropTypes.string,
 };

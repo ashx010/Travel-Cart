@@ -1,8 +1,6 @@
-"use client";
 import React from "react";
 import style from "./ServicesOffered.module.css";
 import Ncard from "../Card/Ncard.jsx";
-import { useEffect } from "react";
 import { font2 } from "../../fonts.js";
 import classNames from "classnames";
 
@@ -24,49 +22,16 @@ export default function ServicesOffered({
       imgSrc: "/services_offered_images/hotel_book.jpeg",
       name: "Hotel Booking",
       before: "/services_offered_images/hotel-preview.png",
+      after: "",
     },
     {
       imgSrc: "/services_offered_images/travel_blog.jpeg",
       name: "Travel Blogs",
+      before: "",
       after: "/services_offered_images/blog-preview.png",
     },
   ],
 }) {
-  useEffect(() => {
-    Services.map((service, index) => {
-      if (service.before) {
-        const new_style = document.createElement("style");
-        new_style.innerHTML = `
-          .${style["card-header-servicesOffered"]}.${
-          style[`card-${index + 1}`]
-        }:hover::before {
-            background: url(${service.before});
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 1;
-          }
-        `;
-        document.head.appendChild(new_style);
-      }
-      if (service.after) {
-        const new_style = document.createElement("style");
-        new_style.innerHTML = `
-          .${style["card-header-servicesOffered"]}.${
-          style[`card-${index + 1}`]
-        }:hover::after {
-            background: url(${service.after});
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 1;
-          }
-        `;
-        document.head.appendChild(new_style);
-      }
-    });
-  }, [Services]);
-
   return (
     <>
       <h2
@@ -82,12 +47,16 @@ export default function ServicesOffered({
             imgAlt={service.name}
             cardBodyHeading={service.name}
             cardContainerClass={style["card-container-servicesOffered"]}
-            cardHeaderClass={classNames(
-              style["card-header-servicesOffered"],
-              style[`card-${index + 1}`]
-            )}
-            cardImageClass={style["card-image-servicesOffered"]}
+            cardHeaderClass={style["card-header-servicesOffered"]}
             cardBodyHeaderClass={style["card-body-heading-servicesOffered"]}
+            applyImgHover1Class={
+              service.before ? [style[`hover-card-${index + 1}-first`]] : ""
+            }
+            applyImgHover1ImgSrc={service.before}
+            applyImgHover2Class={
+              service.after ? [style[`hover-card-${index + 1}-sec`]] : ""
+            }
+            applyImgHover2ImgSrc={service.after}
           />
         ))}
       </div>

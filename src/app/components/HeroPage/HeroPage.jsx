@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 import style from "./HeroPage.module.css";
 import Ncard from "../Card/Ncard";
-import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
+import ModeOfTravelIcon from "@mui/icons-material/ModeOfTravel";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import { canada, font2, font3 } from "../../fonts.js" 
+import { canada, font2, font3 } from "../../fonts.js";
 import classNames from "classnames";
 import { ButtonStyle1, ButtonStyle2 } from "../all/styledButtons";
+import Image from "next/image";
 
 export default function HeroPage({
   titleName = "Scripet",
@@ -40,51 +41,74 @@ export default function HeroPage({
     },
   ],
 }) {
-  const [currImgSrcList, setCurrImgSrcList] = useState(imgSrcList);
-  const [translateXProp, setTranslateXProp] = useState("translateX(0)");
-  const [translateMainProp, setTranslateMainProp] = useState("translate(0,0)");
-  const [translateYProp, setTranslateYProp] = useState("translate(0%, 0%)");
-  const [cardTwoStyleHover, setTwoCardStyleHover] =
-    useState("translate(3%, -6%)");
+  const [currZIndexList, setCurrZIndexList] = useState([3, 2, 1]);
+  const [translateList, setTranslateList] = useState({
+    main: "translate(0,0)",
+    responsive: ["translate(0%, 0%)", "translateX(0%)", "translateX(0%)"],
+    cardStyle: [
+      "translate(6%, -12%",
+      "translate(3%, -6%)",
+      "translate(0%, 0%)",
+    ],
+  });
   const [responsiveCond, setResponsiveCond] = useState(false);
 
   useEffect(() => {
     setResponsiveCond(window.innerWidth > 850);
-    let newList = [];
+    let newZIndexList = currZIndexList;
+    let newHoverCard = translateList["cardStyle"];
+
     const intervalId = setInterval(() => {
       //set transition for hero cards
-      setTranslateXProp("translateX(-10%)");
-      setTranslateYProp(
-        `${
-          window.innerWidth <= 850
-            ? "translate(-10%, -5%)"
-            : "translate(-15%, 0%)"
-        }`
-      );
-      setTranslateMainProp("translate(2%, 0%)");
+      newHoverCard[newHoverCard.indexOf("translate(0%, 0%)")] = "translate(-15%, 0%)";
+      setTranslateList({
+        responsive: [
+          "translate(-10%, -5%)",
+          "translateX(-10%)",
+          "translateX(-5%)",
+        ],
+        cardStyle: newHoverCard,
+        main: "translate(2%, 0%)",
+      });
 
       setTimeout(() => {
-        newList = [...currImgSrcList];
-        newList.push(newList.shift());
-        setCurrImgSrcList(newList);
-        setTranslateXProp("translateX(0)");
-        setTranslateYProp("translate(0%, 0%)");
-        setTranslateMainProp("translate(0, 0)");
+        //set new z-index for hero cards
+        newZIndexList.push(newZIndexList.shift());
+        setCurrZIndexList(newZIndexList);
+
+        newHoverCard[newHoverCard.indexOf("translate(-15%, 0%)")] = "translate(0%, 0%)";
+        newHoverCard.push(newHoverCard.shift());
+
+        setTranslateList({
+          responsive: ["translate(0%, 0%)", "translateX(0%)", "translateX(0%)"],
+          cardStyle: newHoverCard,
+          main: "translate(0, 0)",
+        });
       }, 1000);
     }, 5000);
     return () => clearInterval(intervalId);
-  }, [imgSrcList]);
+  }, [translateList, currZIndexList]);
 
   useEffect(() => {
     setResponsiveCond(window.innerWidth > 850);
+    let newHoverCard = translateList["cardStyle"];
     if (responsiveCond) {
       const hoverCard = () => {
-        setTranslateYProp("translate(6%, -230%)");
-        setTwoCardStyleHover("translate(6%, -120%)");
+        newHoverCard[newHoverCard.indexOf("translate(0%, 0%)")] = "translate(6%, -230%)";
+        newHoverCard[newHoverCard.indexOf("translate(3%, -6%)")] = "translate(6%, -120%)";
+
+        setTranslateList({
+          ...translateList,
+          cardStyle: newHoverCard,
+        });
       };
       const unhoverCard = () => {
-        setTranslateYProp("translate(0%, 0%)");
-        setTwoCardStyleHover("translate(3%, -6%)");
+        newHoverCard[newHoverCard.indexOf("translate(6%, -230%)")] = "translate(0%, 0%)";
+        newHoverCard[newHoverCard.indexOf("translate(6%, -120%)")] = "translate(3%, -6%)";
+        setTranslateList({
+          ...translateList,
+          cardStyle: newHoverCard,
+        });
       };
       const placeListContainer = document.getElementById(
         "placeListViewContainer"
@@ -101,113 +125,93 @@ export default function HeroPage({
 
   return (
     <div className={style["hero-container"]}>
-      <div className={classNames(style["title"], font2.className)}>{titleName}</div>
+      <div className={classNames(style["title"], font2.className)}>
+        {titleName}
+      </div>
       <div className={classNames(style["text-container"], font3.className)}>
-        {currImgSrcList[0].name}
+        {imgSrcList[currZIndexList.indexOf(3)].name}
         <div className={style["city"]}>
           <ButtonStyle2
             variant="contained"
             size="small"
             endIcon={<TravelExploreIcon />}
           >
-            {currImgSrcList[0].city}
+            {imgSrcList[currZIndexList.indexOf(3)].city}
           </ButtonStyle2>
         </div>
       </div>
       <div
         className={style["image-container"]}
         style={{
-          background: `url(${currImgSrcList[0].src}) no-repeat center / cover`,
-          transform: !responsiveCond ? translateMainProp : "none",
+          transform: !responsiveCond ? translateList["main"] : "translate(0,0)",
         }}
       >
-        {responsiveCond && (
-          <div
-            className={style["place-list-view-container"]}
-            id="placeListViewContainer"
-          >
+        {imgSrcList.map((item, index) => (
+          <Image
+            key={index}
+            src={item.src}
+            alt={item.name}
+            fill={true}
+            sizes="90vw"
+            style={{
+              objectFit: "cover",
+              objectPosition: "center",
+              zIndex: currZIndexList[index],
+            }}
+            priority={true}
+          />
+        ))}
+
+        <div
+          className={style["place-list-view-container"]}
+          id="placeListViewContainer"
+        >
+          {imgSrcList.map((item, index) => (
             <Ncard
-              imgSrc={currImgSrcList[0].src}
-              imgAlt={currImgSrcList[0].name}
-              cardBodyHeading={currImgSrcList[0].name}
+              key={index}
+              imgSrc={item.src}
+              imgAlt={item.name}
+              cardBodyHeading={responsiveCond ? item.name : ""}
               cardContainerClass={style["card-place-container-hero"]}
-              cardImageClass={style["card-place-image-hero"]}
-              cardBodyHeaderClass={classNames(style["card-place-heading-hero"], font2.className)}
+              cardHeaderClass={style["card-place-image-hero"]}
+              cardImageSizes="20vw"
+              cardBodyHeaderClass={
+                responsiveCond
+                  ? classNames(
+                      style["card-place-heading-hero"],
+                      font2.className
+                    )
+                  : ""
+              }
               cardContainerStyle={{
-                backgroundColor: currImgSrcList[0].color,
-                transform: "translate(6%, -12%)",
+                backgroundColor: item.color,
+                transform: responsiveCond
+                  ? translateList["cardStyle"][index]
+                  : translateList["responsive"][index],
+                zIndex: 100-currZIndexList[index],
               }}
-              cardBodyHeaderStyle={{ color: currImgSrcList[0].textColor }}
+              cardBodyHeaderStyle={
+                responsiveCond ? { color: item.textColor } : {}
+              }
             />
-            <Ncard
-              imgSrc={currImgSrcList[2].src}
-              imgAlt={currImgSrcList[2].name}
-              cardBodyHeading={currImgSrcList[2].name}
-              cardContainerClass={style["card-place-container-hero"]}
-              cardImageClass={style["card-place-image-hero"]}
-              cardBodyHeaderClass={classNames(style["card-place-heading-hero"], font2.className)}
-              cardContainerStyle={{
-                backgroundColor: currImgSrcList[2].color,
-                transform: cardTwoStyleHover,
-              }}
-              cardBodyHeaderStyle={{ color: currImgSrcList[2].textColor }}
-            />
-            <Ncard
-              imgSrc={currImgSrcList[1].src}
-              imgAlt={currImgSrcList[1].name}
-              cardBodyHeading={currImgSrcList[1].name}
-              cardContainerClass={style["card-place-container-hero"]}
-              cardImageClass={style["card-place-image-hero"]}
-              cardBodyHeaderClass={classNames(style["card-place-heading-hero"], font2.className)}
-              cardContainerStyle={{
-                backgroundColor: currImgSrcList[1].color,
-                transform: translateYProp,
-              }}
-              cardBodyHeaderStyle={{ color: currImgSrcList[1].textColor }}
-            />
-          </div>
-        )}
+          ))}
+        </div>
       </div>
 
-      {!responsiveCond && (
-        <div className={style["place-list-view-container"]} id="placeListViewContainer">
-          <Ncard
-            imgSrc={currImgSrcList[1].src}
-            imgAlt={currImgSrcList[1].name}
-            cardContainerClass={style["card-place-container-hero"]}
-            cardImageClass={style["card-place-image-hero"]}
-            cardContainerStyle={{
-              backgroundColor: currImgSrcList[1].color,
-              transform: translateYProp,
-            }}
-          />
-          <Ncard
-            imgSrc={currImgSrcList[2].src}
-            imgAlt={currImgSrcList[2].name}
-            cardContainerClass={style["card-place-container-hero"]}
-            cardImageClass={style["card-place-image-hero"]}
-            cardContainerStyle={{
-              backgroundColor: currImgSrcList[2].color,
-              transform: translateXProp,
-            }}
-          />
-          <Ncard
-            imgSrc={currImgSrcList[0].src}
-            imgAlt={currImgSrcList[0].name}
-            cardContainerClass={style["card-place-container-hero"]}
-            cardImageClass={style["card-place-image-hero"]}
-            cardContainerStyle={{
-              backgroundColor: currImgSrcList[0].color,
-              transform: translateXProp,
-            }}
-          />
-        </div>
-      )}
       {heroPageTitle && (
         <div className={style["text-container-main"]}>
-          <h1 className={classNames(style["heading-hero"], font2.className)}>{heroPageTitle}</h1>
+          <h1 className={classNames(style["heading-hero"], font2.className)}>
+            {heroPageTitle}
+          </h1>
           {heroPageSubTitle && (
-            <p className={classNames(style["sub-heading-hero"], canada.className)}>{heroPageSubTitle}</p>
+            <p
+              className={classNames(
+                style["sub-heading-hero"],
+                canada.className
+              )}
+            >
+              {heroPageSubTitle}
+            </p>
           )}
           <div className={style["subscribe-container-hero-main"]}>
             <input
