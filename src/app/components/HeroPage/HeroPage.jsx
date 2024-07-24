@@ -44,7 +44,7 @@ export default function HeroPage({
   const [currZIndexList, setCurrZIndexList] = useState([3, 2, 1]);
   const [translateList, setTranslateList] = useState({
     main: "translate(0,0)",
-    responsive: ["translate(0%, 0%)", "translateX(0%)", "translateX(0%)"],
+    responsive: ["translateX(600%)", "translateX(0%)", "translateX(0%)"],
     cardStyle: [
       "translate(6%, -12%",
       "translate(3%, -6%)",
@@ -57,18 +57,14 @@ export default function HeroPage({
     setResponsiveCond(window.innerWidth > 850);
     let newZIndexList = currZIndexList;
     let newHoverCard = translateList["cardStyle"];
+    let newResponsiveCard = translateList["responsive"];
 
     const intervalId = setInterval(() => {
       //set transition for hero cards
       newHoverCard[newHoverCard.indexOf("translate(0%, 0%)")] = "translate(-15%, 0%)";
       setTranslateList({
-        responsive: [
-          "translate(-10%, -5%)",
-          "translateX(-10%)",
-          "translateX(-5%)",
-        ],
+        ...translateList,
         cardStyle: newHoverCard,
-        main: "translate(2%, 0%)",
       });
 
       setTimeout(() => {
@@ -79,10 +75,12 @@ export default function HeroPage({
         newHoverCard[newHoverCard.indexOf("translate(-15%, 0%)")] = "translate(0%, 0%)";
         newHoverCard.push(newHoverCard.shift());
 
+        newResponsiveCard.push(newResponsiveCard.shift());
+
         setTranslateList({
-          responsive: ["translate(0%, 0%)", "translateX(0%)", "translateX(0%)"],
+          ...translateList,
+          responsive: newResponsiveCard,
           cardStyle: newHoverCard,
-          main: "translate(0, 0)",
         });
       }, 1000);
     }, 5000);

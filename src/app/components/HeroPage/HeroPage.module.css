@@ -250,7 +250,7 @@
 
 @media (max-width: 850px) {
   .hero-container {
-    min-height: 80vh;
+    min-height: 60vh;
     height: unset;
     justify-content: flex-start;
     align-items: center;
@@ -279,7 +279,7 @@
     transition: all 1s ease-in-out;
     flex-direction: column;
     margin: 0;
-    border-radius: 0 0 1em 1em;
+    border-radius: 0;
   }
 
   .image-container::after {
@@ -328,7 +328,8 @@
     position: relative;
     width: 90%;
     gap: 1em;
-    overflow: auto;
+    overflow: hidden;
+    height: auto;
   }
 
   .card-place-container-hero {
@@ -337,6 +338,10 @@
     justify-content: space-between !important;
     width: 13rem !important;
     position: unset !important;
+  }
+
+  .card-place-image-hero {
+    width: 100% !important;
   }
 
   .text-container .city {
