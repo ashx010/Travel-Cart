@@ -156,6 +156,7 @@
   width: 16rem !important;
   position: absolute !important;
   transition: all .5s ease-in-out;
+  padding: 2% !important;
 }
 
 .card-place-image-hero {
@@ -338,6 +339,7 @@
     justify-content: space-between !important;
     width: 13rem !important;
     position: unset !important;
+    padding: 1% !important;
   }
 
   .card-place-image-hero {
@@ -358,7 +360,7 @@
     position: absolute;
     z-index: 10;
     left: 1%;
-    top: 25%;
+    top: 20%;
     letter-spacing: 5px;
     color: #f1faee;
     font-weight: 400;

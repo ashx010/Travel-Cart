@@ -3,9 +3,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import style from "./Ncard.module.css";
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { LTR, canada } from "../../fonts.js";
 import Image from "next/image";
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 
 export default function Ncard({
   imgSrc = "",
@@ -34,9 +36,30 @@ export default function Ncard({
   applyImgHover2ImgSrc = "",
   applyImgHover1Sizes = "33vw",
   applyImgHover2Sizes = "33vw",
+  applyHeaderFullWidth = false,
 }) {
   const cref = useRef(null);
   const torchRef = useRef(null);
+  const [isFullWidth, setIsFullWidth] = useState(false);
+  const [fullWidthActive, setFullWidthActive] = useState("");
+  const [isResposive, setIsResponsive] = useState(false);
+
+  const handleHeaderFullWidth = () => {
+    setIsFullWidth(!isFullWidth);
+    if (!fullWidthActive) {
+      setFullWidthActive(style["active-full-width"]);
+    } else {
+      setFullWidthActive("");
+    }
+  };
+
+  useEffect(() => {
+    if(window.innerWidth <= 500) {
+      setIsResponsive(true);
+    }else {
+      setIsResponsive(false);
+    }
+  });
 
   useEffect(() => {
     if (!apply3dEffect || !applyTorchEffect) {
@@ -104,8 +127,36 @@ export default function Ncard({
       {(cardHeaderClass || cardHeaderStyle || imgSrc) && (
         <div
           style={cardHeaderStyle}
-          className={classNames(style["cardHeader"], cardHeaderClass)}
+          className={classNames(style["cardHeader"], fullWidthActive, cardHeaderClass)}
         >
+          {!isResposive && applyHeaderFullWidth && (
+            !isFullWidth ? (
+              <FullscreenIcon
+                style={{
+                  position: "absolute",
+                  top: "0.5rem",
+                  right: "0.5rem",
+                  cursor: "pointer",
+                  zIndex: 150,
+                }}
+                onClick={handleHeaderFullWidth}
+                size="small"
+              />
+            ) : (
+              <FullscreenExitIcon
+                style={{
+                  position: "absolute",
+                  top: "0.5rem",
+                  right: "0.5rem",
+                  cursor: "pointer",
+                  zIndex: 150,
+                }}
+                onClick={handleHeaderFullWidth}
+                size="small"
+              />
+            )
+          )}
+
           {applyImgHover1Class && (
             <div className={classNames(style["imgHoverEffect1"], ...applyImgHover1Class)}>
               <Image
@@ -124,9 +175,10 @@ export default function Ncard({
               alt={imgAlt}
               fill={true}
               sizes={cardImageSizes}
-              style={{objectFit: "cover", objectPosition: "center"}}
+              style={{objectFit: "cover", objectPosition: "center", cursor: !isResposive && applyHeaderFullWidth ? "pointer" : "default"}}
               className={classNames(style["cardImage"], cardImageClass)}
-              priority={false}
+              priority={true}
+              onClick={!isResposive && applyHeaderFullWidth ? handleHeaderFullWidth : null}
             />
           )}
           {applyImgHover2Class && (

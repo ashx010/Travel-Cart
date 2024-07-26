@@ -2,6 +2,8 @@ import React from "react";
 import classNames from "classnames";
 import style from "./TopAgencyList.module.css";
 import { font2 } from "../../fonts.js";
+import { TopAgencyData } from "./TopAgencyData";
+import Ncard from "../Card/Ncard";
 
 export default function TopAgencyList({
 	title = "Top Agencies",
@@ -13,6 +15,11 @@ export default function TopAgencyList({
       >
 				{title}
 			</h2>
+      {TopAgencyData.map((agency, index) => (
+        <Ncard
+          key={index}
+        />
+      ))}
     </div>
   );
 }

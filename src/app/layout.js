@@ -1,11 +1,14 @@
 import "./globals.css";
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 import { LTR } from "./fonts.js";
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SessionWrapper } from "./components/SessionWrapper";
+import Navbar from "./components/Navbar/Navbar.jsx";
+
 
 export const metadata = {
   title: "TCart",
@@ -18,7 +21,10 @@ export default function RootLayout({ children }) {
       <body className={LTR.className}>
         <Analytics />
         <SpeedInsights />
-        {children}
+        <SessionWrapper>
+          <Navbar />
+          {children}
+        </SessionWrapper>
       </body>
     </html>
   );

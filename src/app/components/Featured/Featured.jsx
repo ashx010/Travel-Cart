@@ -10,14 +10,13 @@ export default function Featured() {
   return (
     <div className={classNames(style["featured-container"], font2.variable)}>
       <h2 className={style["title-featured"]}>Featured</h2>
-      {dummy_data.map((data) => (
+      {dummy_data.map((data, index) => (
         <Ncard
-          key={data.package_id}
+          key={index}
           imgSrc={data.image_url}
           imgAlt={data.title}
           cardContainerClass={style["card-container-featured"]}
           cardHeaderClass={style["card-header-featured"]}
-          cardBodyHeaderClass={style["card-body-heading-featured"]}
           cardBodyDescClass={style["card-body-desc-featured"]}
           apply3dEffect = {true}
           applyTorchEffect = {true}
@@ -34,6 +33,7 @@ export default function Featured() {
             cost={data.cost}
             rating={data.rating}
           />}
+          applyHeaderFullWidth={true}
         />
       ))}
     </div>

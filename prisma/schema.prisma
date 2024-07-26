@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id                Int       @id @default(autoincrement())
+  name              String    @db.VarChar(255)
+  username          String    @unique @db.VarChar(255)
+  email             String    @unique @db.VarChar(255)
+  password          String    
+  country           String    @default("India") @db.VarChar(255)
+  contactNumber     String    @unique @db.VarChar(255)
+  address           String    @db.VarChar(255)
+  profilePic        String?
+  status            Boolean   @default(true)
+  isVendor          Boolean   @default(false)
+  isVerified        Boolean   @default(false)
+  isDeleted         Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  lastLogin         DateTime  @default(now())
+  Vendor            Vendor?
+}
+
+model Vendor {
+  id                Int       @id @default(autoincrement())
+  userId            Int       @unique
+  companyName       String    @db.VarChar(255)
+  description       String?
+  rating            Float     @default(0)
+  totalPackages     Int       @default(0)
+  socialMediaLinks  String?
+  isVerified        Boolean   @default(false)
+  TravelPackages    TravelPackage[]
+  User              User      @relation(fields: [userId], references: [id])
+}
+
+model TravelPackage {
+  id           Int       @id @default(autoincrement())
+  vendorId     Int
+  title        String    @db.VarChar(255)
+  imageUrl     String    @db.VarChar(255)
+  destination  String    @db.VarChar(255)
+  durationDays Int
+  description  String
+  cost         String    @db.VarChar(255)
+  rating       Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @default(now())
+  status       Boolean   @default(true)
+  isFeatured   Boolean   @default(false)
+  isVerified   Boolean   @default(false)
+  isDeleted    Boolean   @default(false)
+  vendor       Vendor    @relation(fields: [vendorId], references: [id])
+}
