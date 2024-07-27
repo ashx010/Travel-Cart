@@ -27,7 +27,7 @@ export default function MainNavbar({
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isResponsive]);
 
   return (
     <nav className={style["navbar-c"]}>
