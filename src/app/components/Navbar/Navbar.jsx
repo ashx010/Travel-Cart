@@ -9,6 +9,7 @@ import NavButton from "./NavButton.jsx";
 import InfoIcon from "@mui/icons-material/Info";
 import ContactlessIcon from "@mui/icons-material/Contactless";
 import { SessionWrapper } from "../SessionWrapper.jsx";
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 
 export default function MainNavbar({
@@ -31,7 +32,7 @@ export default function MainNavbar({
   return (
     <nav className={style["navbar-c"]}>
       <ul className={style["navbar-links-c"]}>
-        {!isResponsive && <DesktopNavLinks link1={link1} link4={link4} />}
+        <DesktopNavLinks link1={link1} link4={link4} responsive={isResponsive} />
         <li>
           <MoreNav>
             {isResponsive && (
@@ -51,6 +52,11 @@ export default function MainNavbar({
               <SessionWrapper>
                 <AuthButton />
               </SessionWrapper>
+            </li>
+            <li>
+              <NavButton route="/register" icon={AppRegistrationIcon}>
+                Register
+              </NavButton>
             </li>
           </MoreNav>
         </li>

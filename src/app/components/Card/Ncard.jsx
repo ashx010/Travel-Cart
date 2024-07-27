@@ -59,7 +59,7 @@ export default function Ncard({
     }else {
       setIsResponsive(false);
     }
-  });
+  }, [isResposive]);
 
   useEffect(() => {
     if (!apply3dEffect || !applyTorchEffect) {
