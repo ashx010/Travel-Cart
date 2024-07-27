@@ -3,8 +3,11 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useSession } from "next-auth/react";
 
-export default function AuthButton({ status }) {
+
+export default function AuthButton() {
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   const handleSignOut = async () => {

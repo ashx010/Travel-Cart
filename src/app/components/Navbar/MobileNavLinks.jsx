@@ -2,7 +2,7 @@ import NavButton from "./NavButton.jsx";
 import HomeIcon from "@mui/icons-material/Home";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
-export default function MobileNavLinks({ link1, link4, status }) {
+export default function MobileNavLinks({ link1, link4 }) {
   return (
     <>
       <li>

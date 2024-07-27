@@ -1,19 +1,23 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
-import SignOutButton from '../components/SignOutButton';
+import { useRouter } from 'next/navigation';
+import { ButtonStyle4 } from '../components/all/styledButtons';
 
 export default function Dashboard() {
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect('/login');
-    },
-  });
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   if (status === 'loading') {
     return <p>Loading...</p>;
+  }
+  else if (status === 'unauthenticated') {
+    return(
+      <div>
+        <p>You need to be signed in to access this page.</p>
+        <ButtonStyle4 onClick={() => router.push("/login")}>Sign in</ButtonStyle4>
+      </div>
+    )
   }
 
   return (
@@ -24,7 +28,6 @@ export default function Dashboard() {
       <p>Email: {session.user.email}</p>
       <p>Vendor Status: {session.user.isVendor ? 'Vendor' : 'Not a Vendor'}</p>
       <p>Verification Status: {session.user.isVerified ? 'Verified' : 'Not Verified'}</p>
-      <SignOutButton />
     </div>
   );
 }

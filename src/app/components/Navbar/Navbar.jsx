@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import style from "./Navbar.module.css";
 import MoreNav from "./MoreNav.jsx";
 import DesktopNavLinks from "./DesktopNavLinks.jsx";
@@ -10,6 +8,8 @@ import AuthButton from "./AuthButton.jsx";
 import NavButton from "./NavButton.jsx";
 import InfoIcon from "@mui/icons-material/Info";
 import ContactlessIcon from "@mui/icons-material/Contactless";
+import { SessionWrapper } from "../SessionWrapper.jsx";
+
 
 export default function MainNavbar({
   link1 = "Home",
@@ -18,13 +18,6 @@ export default function MainNavbar({
   link4 = "Dashboard",
 }) {
   const [isResponsive, setIsResponsive] = useState(false);
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    const navbar = document.querySelector(`.${style["navbar-c"]}`);
-    navbar.style.opacity = status === "loading" ? 0 : 1;
-  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,7 +35,7 @@ export default function MainNavbar({
         <li>
           <MoreNav>
             {isResponsive && (
-              <MobileNavLinks link1={link1} link4={link4} status={status} />
+              <MobileNavLinks link1={link1} link4={link4} />
             )}
             <li>
               <NavButton route="/about" icon={InfoIcon}>
@@ -55,7 +48,9 @@ export default function MainNavbar({
               </NavButton>
             </li>
             <li>
-              <AuthButton status={status} />
+              <SessionWrapper>
+                <AuthButton />
+              </SessionWrapper>
             </li>
           </MoreNav>
         </li>
