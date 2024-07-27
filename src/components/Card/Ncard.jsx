@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import style from "./Ncard.module.css";
 import { useState, useEffect, useRef } from "react";
-import { LTR, canada } from "../../fonts.js";
+import { LTR, canada } from "@/app/fonts.js";
 import Image from "next/image";
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';

@@ -1,7 +1,7 @@
 "use client";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import { LTR, canada } from "../../fonts.js";
+import { LTR, canada } from "@/app/fonts.js";
 
 export const ButtonStyle1 = styled(Button)({
   color: "#f1faee",

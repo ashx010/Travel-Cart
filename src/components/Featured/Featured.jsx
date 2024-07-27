@@ -2,7 +2,7 @@ import React from "react";
 import style from "./Featured.module.css";
 import Ncard from "../Card/Ncard";
 import { dummy_data } from "./featured_dummy_data.js";
-import { font2 } from "../../fonts.js";
+import { font2 } from "@/app/fonts.js";
 import classNames from "classnames";
 import FeatCardDesc from "./FeatCardDesc";
 

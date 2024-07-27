@@ -3,7 +3,7 @@ import { ButtonStyle1 } from "../all/styledButtons.jsx";
 import style from "./Featured.module.css";
 import Rating from "@mui/material/Rating";
 import SendIcon from "@mui/icons-material/Send";
-import { LTR } from "../../fonts.js";
+import { LTR } from "@/app/fonts.js";
 
 export default function FeatCardDesc({
   title = "",

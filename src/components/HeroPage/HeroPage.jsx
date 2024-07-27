@@ -5,7 +5,7 @@ import style from "./HeroPage.module.css";
 import Ncard from "../Card/Ncard";
 import ModeOfTravelIcon from "@mui/icons-material/ModeOfTravel";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import { canada, font2, font3 } from "../../fonts.js";
+import { canada, font2, font3 } from "@/app/fonts.js";
 import classNames from "classnames";
 import { ButtonStyle1, ButtonStyle2 } from "../all/styledButtons";
 import Image from "next/image";

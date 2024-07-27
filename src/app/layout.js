@@ -6,7 +6,7 @@ import "@fontsource/roboto/700.css";
 import { LTR } from "./fonts.js";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Navbar from "./components/Navbar/Navbar.jsx";
+import Navbar from "@/components/Navbar/Navbar.jsx";
 
 
 export const metadata = {

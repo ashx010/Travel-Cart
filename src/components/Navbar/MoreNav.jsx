@@ -33,6 +33,7 @@ export default function MoreNav({ children }) {
       <ButtonStyle3 
         onClick={handleMenuBtn} 
         endIcon={<UnfoldMoreIcon />}
+        className={style["responsive-btn"]}
         ref={buttonRef}
       >
         Menu

@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { ButtonStyle4 } from '../components/all/styledButtons';
+import { ButtonStyle4 } from '../../components/all/styledButtons';
 
 export default function Dashboard() {
   const { data: session, status } = useSession();

@@ -1,7 +1,7 @@
-import HeroPage from "./components/HeroPage/HeroPage.jsx";
-import Featured from "./components/Featured/Featured.jsx";
-import ServicesOffered from "./components/ServicesOffered/ServicesOffered.jsx";
-import TopAgencyList from "./components/TopAgency/TopAgencyList";
+import HeroPage from "@/components/HeroPage/HeroPage.jsx";
+import Featured from "@/components/Featured/Featured.jsx";
+import ServicesOffered from "@/components/ServicesOffered/ServicesOffered.jsx";
+import TopAgencyList from "@/components/TopAgency/TopAgencyList.jsx";
 
 export default function Home() {
   return (

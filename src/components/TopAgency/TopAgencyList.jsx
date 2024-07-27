@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import style from "./TopAgencyList.module.css";
-import { font2 } from "../../fonts.js";
+import { font2 } from "../../app/fonts.js";
 import { TopAgencyData } from "./TopAgencyData";
 import Ncard from "../Card/Ncard";
 

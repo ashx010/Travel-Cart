@@ -1,5 +1,5 @@
 import React from 'react'
-import { SessionWrapper } from '../components/SessionWrapper'
+import { SessionWrapper } from '../../components/SessionWrapper'
 
 export default function DashboardLayout({ children }) {
   return (

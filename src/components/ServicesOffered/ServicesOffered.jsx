@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./ServicesOffered.module.css";
 import Ncard from "../Card/Ncard.jsx";
-import { font2 } from "../../fonts.js";
+import { font2 } from "../../app/fonts.js";
 import classNames from "classnames";
 
 export default function ServicesOffered({
