@@ -6,6 +6,11 @@ export async function POST(req) {
   try {
     const { name, username, email, password, country, contactNumber, address } = await req.json();
     
+    // Validate input data (you can use a library like Joi or custom validation)
+    if (!name || !username || !email || !password || !country || !contactNumber || !address) {
+      return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
+    }
+
     const existingUser = await prisma.user.findFirst({
       where: {
         OR: [
@@ -35,9 +40,9 @@ export async function POST(req) {
       },
     });
 
-    return NextResponse.json({ message: 'User registered successfully' }, { status: 201 });
+    return NextResponse.json({ message: 'User registered successfully', user }, { status: 201 });
   } catch (error) {
-    console.error(error);
+    console.error('Error during user registration:', error);
     return NextResponse.json({ error: 'Registration failed' }, { status: 500 });
   }
 }
