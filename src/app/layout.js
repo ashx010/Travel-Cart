@@ -7,10 +7,14 @@ import { LTR } from "./fonts.js";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Navbar from "@/components/Navbar/Navbar.jsx";
+import { SessionWrapper } from "@/components/SessionWrapper";
 
 
 export const metadata = {
-  title: "TCart",
+  title: {
+    default: "TCart - Travel the world",
+    template: "%s | TCart",
+  },
   description: "Travel the world with TCart",
 };
 
@@ -20,7 +24,9 @@ export default function RootLayout({ children }) {
       <body className={LTR.className}>
         <Analytics />
         <SpeedInsights />
-        <Navbar />
+        <SessionWrapper>
+          <Navbar />
+        </SessionWrapper>
         {children}
       </body>
     </html>

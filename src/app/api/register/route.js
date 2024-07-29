@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import prisma from '@/lib/prisma';
 
 export async function POST(req) {
@@ -25,7 +25,8 @@ export async function POST(req) {
       return NextResponse.json({ error: 'User already exists' }, { status: 400 });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const saltIndex = bcrypt.genSaltSync(10);
+    const hashedPassword = await bcrypt.hash(password, saltIndex);
     const user = await prisma.user.create({
       data: {
         name,
@@ -36,7 +37,6 @@ export async function POST(req) {
         contactNumber,
         address,
         status: true,
-        // Other fields will use their default values
       },
     });
 

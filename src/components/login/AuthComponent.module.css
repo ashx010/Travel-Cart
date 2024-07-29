@@ -1,0 +1,131 @@
+.titleHeading {
+  font-size: 10rem;
+  text-transform: uppercase;
+  color: #f1faee;
+  width: 95%;
+  text-align: start;
+  position: absolute;
+  top: -5%;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 40%;
+  gap: 1em;
+  padding: 1em 2em;
+  background-color: #f1faee;
+  border-radius: 10px;
+  margin: 1em;
+}
+
+.formFieldGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1em;
+}
+
+.btnFieldGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 1em;
+}
+
+.loginLink {
+  color: #005a62;
+  font-weight: bold;
+  position: relative;
+  cursor: pointer;
+}
+
+.loginLink::before {
+  content: "";
+  position: absolute;
+  width: 10%;
+  height: 1px;
+  bottom: 1%;
+  left: 0;
+  background-color: #1d3557;
+  transition: all 0.5s ease-in-out;
+}
+
+.loginLink:hover {
+  color: #1d3557;
+}
+
+.loginLink:hover::before {
+  width: 100%;
+}
+
+.errorAuth{
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+@media (max-width: 1280px) and (min-height: 700px) {
+  .titleHeading {
+    top: 3%;
+    font-size: 9rem;
+  }
+}
+
+@media (max-width: 1024px) and (min-height: 750px) {
+  .titleHeading {
+    top: 16%;
+    font-size: 6.5rem;
+  }
+  .formContainer {
+    width: 45%;
+  }
+}
+
+@media (min-height: 800px) {
+  .titleHeading {
+    top: 3%;
+  }
+}
+
+@media (min-height: 900px) {
+  .titleHeading {
+    top: 6%;
+  }
+}
+
+@media (max-width: 850px) {
+  .titleHeading {
+    font-size: 8rem;
+  }
+  .formContainer {
+    width: 90%;
+  }
+}
+
+@media (max-width: 500px) {
+  .titleHeading {
+    font-size: 5rem;
+    top: 5%;
+  }
+  .formFieldGroup {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .btnFieldGroup {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 400px) {
+  .titleHeading {
+    font-size: 4rem;
+  }
+}

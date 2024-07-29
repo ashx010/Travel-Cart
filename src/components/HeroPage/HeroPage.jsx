@@ -119,7 +119,7 @@ export default function HeroPage({
         placeListContainer.removeEventListener("mouseout", unhoverCard);
       };
     }
-  });
+  }, [ responsiveCond, translateList]);
 
   return (
     <div className={style["hero-container"]}>
