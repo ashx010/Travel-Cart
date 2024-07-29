@@ -1,7 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { TextField, FormControl, Input, InputLabel, InputAdornment, IconButton, Button } from "@mui/material";
-import { Public as PublicIcon, PublicOff as PublicOffIcon, AppRegistration as AppRegistrationIcon } from "@mui/icons-material";
+import {
+  TextField,
+  FormControl,
+  Input,
+  InputLabel,
+  InputAdornment,
+  IconButton,
+  Button,
+} from "@mui/material";
+import {
+  Public as PublicIcon,
+  PublicOff as PublicOffIcon,
+  AppRegistration as AppRegistrationIcon,
+} from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import { handleRegisterSubmit } from "@/lib/action";
 import style from "./AuthComponent.module.css";
@@ -74,7 +86,7 @@ export default function RegisterForm({ switchForm }) {
     let result = handleRegisterSubmit(formData);
     if (result.status === "Register Failed") {
       setErrorMessage("Failed to register");
-    }else{
+    } else {
       setErrorMessage("Register Success, Redirecting to Login Page");
       setErrorStyleColor("#06d6a0");
       setTimeout(() => {
@@ -221,7 +233,10 @@ export default function RegisterForm({ switchForm }) {
         </p>
       </div>
       {errorMessage && (
-        <h3 className={classNames(style.errorAuth, LTR.className)} style={{color: errorStyleColor}}>
+        <h3
+          className={classNames(style.errorAuth, LTR.className)}
+          style={{ color: errorStyleColor }}
+        >
           {errorMessage}
         </h3>
       )}

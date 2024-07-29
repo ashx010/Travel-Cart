@@ -13,7 +13,9 @@ export default function AuthForm() {
 
   return (
     <>
-      <h1 className={classNames(style.titleHeading, font2.className)}>{isLogin ? "Login" : "Register"}</h1>
+      <h1 className={classNames(style.titleHeading, font2.className)}>
+        {isLogin ? "Login" : "Register"}
+      </h1>
       {isLogin ? (
         <LoginForm switchForm={switchForm} />
       ) : (

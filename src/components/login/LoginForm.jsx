@@ -85,8 +85,7 @@ export default function LoginForm({ switchForm }) {
       });
       if (result?.ok) {
         router.push("/dashboard");
-      } else
-      if (result?.error) {
+      } else if (result?.error) {
         setErrorMessage(() => {
           setTimeout(() => setErrorMessage(""), 5000);
           setErrorLogin((prev) => ({ ...prev, email: true, password: true }));
@@ -175,7 +174,10 @@ export default function LoginForm({ switchForm }) {
         </div>
       </Suspense>
       {errorMessage && (
-        <h3 className={classNames(style.errorAuth, LTR.className)} style={{color: errorStyleColor}}>
+        <h3
+          className={classNames(style.errorAuth, LTR.className)}
+          style={{ color: errorStyleColor }}
+        >
           {errorMessage}
         </h3>
       )}
