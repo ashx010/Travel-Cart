@@ -169,7 +169,7 @@ export default function LoginForm({ switchForm }) {
             Login
           </SubmitButton>
           <p onClick={switchForm} className={style.loginLink}>
-            Don't have an account? Register
+            Do not have an account? Register
           </p>
         </div>
       </Suspense>
