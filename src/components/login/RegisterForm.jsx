@@ -20,6 +20,7 @@ import style from "./AuthComponent.module.css";
 import { canada, LTR } from "@/app/fonts";
 import classNames from "classnames";
 import { useRouter } from "next/navigation";
+import LinearProgress, {linearProgressClasses} from "@mui/material/LinearProgress";
 
 export default function RegisterForm({ switchForm }) {
   const router = useRouter();
@@ -48,6 +49,7 @@ export default function RegisterForm({ switchForm }) {
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorStyleColor, setErrorStyleColor] = useState("#e63946");
+  const [progressState, setProgressState] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
@@ -62,10 +64,11 @@ export default function RegisterForm({ switchForm }) {
     setError((prev) => ({ ...prev, [name]: false }));
   };
 
-  const handleRegisterEvent = (e) => {
+  const handleRegisterEvent = async (e) => {
     e.preventDefault();
     let valid = true;
     const newError = {};
+    setProgressState(true);
 
     if (formData.password !== formData.repassword) {
       newError.password = true;
@@ -83,16 +86,39 @@ export default function RegisterForm({ switchForm }) {
     setError((prev) => ({ ...prev, ...newError }));
     if (!valid) return;
 
-    let result = handleRegisterSubmit(formData);
-    if (result.status === "Register Failed") {
+    let result = await handleRegisterSubmit(formData);
+    if (result.result === "failed") {
       setErrorMessage("Failed to register");
-    } else {
+      setProgressState(false);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+    } else if (result.result === "success") {
       setErrorMessage("Register Success, Redirecting to Login Page");
       setErrorStyleColor("#06d6a0");
       setTimeout(() => {
         setErrorMessage("");
         setErrorStyleColor("#e63946");
+        setProgressState(false);
         switchForm();
+      }, 1000);
+    } else if(result.result === "required"){
+      setErrorMessage("Please fill all the fields");
+      setProgressState(false);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+    } else if(result.result === "user_exists"){
+      setErrorMessage("User already exists");
+      setProgressState(false);
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+    } else {
+      setErrorMessage("Something went wrong");
+      setProgressState(false);
+      setTimeout(() => {
+        setErrorMessage("");
       }, 3000);
     }
   };
@@ -112,8 +138,22 @@ export default function RegisterForm({ switchForm }) {
     },
   });
 
+  const CustomLinearProgress = styled(LinearProgress)(() => ({
+    height: 5,
+    width: "100%",
+    borderRadius: "50%",
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: '#457B9D',
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: "50%",
+      backgroundColor: '#1d3557',
+    },
+  }));
+
   return (
     <form className={style.formContainer} onSubmit={handleRegisterEvent}>
+      {progressState && <CustomLinearProgress />}
       <div className={style.formFieldGroup}>
         <TextField
           error={error.name}

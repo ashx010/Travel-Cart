@@ -17,7 +17,7 @@ export const handleRegisterSubmit = async (formData) => {
       !contactNumber ||
       !address
     ) {
-      return { error: "All fields are required" }, { status: 400 };
+      return { result: "required" };
     }
 
     const existingUser = await prisma.user.findFirst({
@@ -27,7 +27,7 @@ export const handleRegisterSubmit = async (formData) => {
     });
 
     if (existingUser) {
-      return { error: "User already exists" }, { status: 400 };
+      return { result: "user_exists" };
     }
 
     const saltIndex = bcrypt.genSaltSync(10);
@@ -45,9 +45,9 @@ export const handleRegisterSubmit = async (formData) => {
       },
     });
 
-    return { status: "Register Success" };
+    return { result: "success" };
   } catch (error) {
     console.error("Failed to register", error);
-    return { status: "Register Failed" };
+    return { result: "failed" };
   }
 };

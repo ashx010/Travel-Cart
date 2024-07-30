@@ -1,7 +1,10 @@
+"use client";
 import React, { useEffect, useRef } from "react";
 import { ButtonStyle3 } from "../all/styledButtons.jsx";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import style from "./Navbar.module.css";
+import NavButton from "./NavButton.jsx";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function MoreNav({ children }) {
   const dropdownRef = useRef(null);
@@ -30,8 +33,8 @@ export default function MoreNav({ children }) {
 
   return (
     <>
-      <ButtonStyle3 
-        onClick={handleMenuBtn} 
+      <ButtonStyle3
+        onClick={handleMenuBtn}
         endIcon={<UnfoldMoreIcon />}
         className={style["responsive-btn"]}
         ref={buttonRef}
@@ -39,7 +42,14 @@ export default function MoreNav({ children }) {
         Menu
       </ButtonStyle3>
       <div className={style["more-dropdown"]} ref={dropdownRef}>
-        <ul>{children}</ul>
+        <ul>
+          {children}
+          <li>
+            <NavButton route="/dashboard" icon={AccountCircleIcon}>
+              Profile
+            </NavButton>
+          </li>
+        </ul>
       </div>
     </>
   );

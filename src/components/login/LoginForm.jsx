@@ -21,6 +21,7 @@ import { canada, LTR } from "@/app/fonts";
 import { useRouter } from "next/navigation";
 import classNames from "classnames";
 import { signIn } from "next-auth/react";
+import LinearProgress, {linearProgressClasses} from "@mui/material/LinearProgress";
 
 export default function LoginForm({ switchForm }) {
   const router = useRouter();
@@ -40,6 +41,7 @@ export default function LoginForm({ switchForm }) {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [errorStyleColor, setErrorStyleColor] = useState("#e63946");
+  const [progressState, setProgressState] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,7 +55,7 @@ export default function LoginForm({ switchForm }) {
 
   const handleLoginEvent = async (e) => {
     e.preventDefault();
-
+    setProgressState(true);
     let valid = true;
     const newError = {};
 
@@ -74,24 +76,23 @@ export default function LoginForm({ switchForm }) {
     }
 
     setErrorLogin((prev) => ({ ...prev, ...newError }));
-    if (!valid) return;
-
-    // let result = handleLoginSubmit(formLoginData);
+    if (!valid){
+      setProgressState(false);
+      return;
+    }
 
     try {
-      let result = await signIn("credentials", {
-        ...formLoginData,
-        redirect: false,
-      });
+      let result = await signIn("credentials", formLoginData);
       if (result?.ok) {
-        router.push("/dashboard");
-      } else if (result?.error) {
+        setProgressState(false);
+      }
+      else if (result?.error) {
         setErrorMessage(() => {
           setTimeout(() => setErrorMessage(""), 5000);
-          setErrorLogin((prev) => ({ ...prev, email: true, password: true }));
           return "Invalid email or password";
         });
         setErrorLogin((prev) => ({ ...prev, [email]: true, [password]: true }));
+        setProgressState(false);
       }
     } catch (error) {
       console.error("An unexpected error happened:", error);
@@ -99,6 +100,7 @@ export default function LoginForm({ switchForm }) {
         setTimeout(() => setErrorMessage(""), 5000);
         return "An unexpected error happened";
       });
+      setProgressState(false);
     }
   };
 
@@ -117,62 +119,74 @@ export default function LoginForm({ switchForm }) {
     },
   });
 
+  const CustomLinearProgress = styled(LinearProgress)(() => ({
+    height: 5,
+    width: "100%",
+    borderRadius: "50%",
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+      backgroundColor: '#457B9D',
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+      borderRadius: "50%",
+      backgroundColor: '#1d3557',
+    },
+  }));
+
   return (
     <form className={style.formContainer}>
-      <Suspense fallback={<Skeleton />}>
-        <TextField
-          error={errorLogin.email}
+      {progressState && <CustomLinearProgress />}
+
+      <TextField
+        error={errorLogin.email}
+        onFocus={handleFocusError}
+        id="email"
+        label="Email"
+        variant="standard"
+        name="email"
+        type="email"
+        value={formLoginData.email}
+        onChange={handleChange}
+        fullWidth
+      />
+
+      <FormControl error={errorLogin.password} variant="standard" fullWidth>
+        <InputLabel htmlFor="password">Enter Password</InputLabel>
+        <Input
+          id="password"
+          label="Password"
           onFocus={handleFocusError}
-          id="email"
-          label="Email"
-          variant="standard"
-          name="email"
-          type="email"
-          value={formLoginData.email}
+          type={showPassword ? "text" : "password"}
+          value={formLoginData.password}
           onChange={handleChange}
-          fullWidth
+          name="password"
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {showPassword ? <PublicIcon /> : <PublicOffIcon />}
+              </IconButton>
+            </InputAdornment>
+          }
         />
-      </Suspense>
-      <Suspense fallback={<Skeleton />}>
-        <FormControl error={errorLogin.password} variant="standard" fullWidth>
-          <InputLabel htmlFor="password">Enter Password</InputLabel>
-          <Input
-            id="password"
-            label="Password"
-            onFocus={handleFocusError}
-            type={showPassword ? "text" : "password"}
-            value={formLoginData.password}
-            onChange={handleChange}
-            name="password"
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {showPassword ? <PublicIcon /> : <PublicOffIcon />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      </Suspense>
-      <Suspense fallback={<Skeleton />}>
-        <div className={style.btnFieldGroup}>
-          <SubmitButton
-            type="submit"
-            variant="contained"
-            onClick={handleLoginEvent}
-            endIcon={<AppRegistrationIcon />}
-          >
-            Login
-          </SubmitButton>
-          <p onClick={switchForm} className={style.loginLink}>
-            Do not have an account? Register
-          </p>
-        </div>
-      </Suspense>
+      </FormControl>
+
+      <div className={style.btnFieldGroup}>
+        <SubmitButton
+          type="submit"
+          variant="contained"
+          onClick={handleLoginEvent}
+          endIcon={<AppRegistrationIcon />}
+        >
+          Login
+        </SubmitButton>
+        <p onClick={switchForm} className={style.loginLink}>
+          Do not have an account? Register
+        </p>
+      </div>
+
       {errorMessage && (
         <h3
           className={classNames(style.errorAuth, LTR.className)}

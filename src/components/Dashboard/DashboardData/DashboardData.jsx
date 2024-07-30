@@ -7,6 +7,9 @@ import { useSession } from "next-auth/react";
 export default function Dashboard() {
   const { data: session } = useSession();
   const router = useRouter();
+  const handleSignOut = async () => {
+    signOut();
+  }
   return (
     <>
       <div>
@@ -14,9 +17,7 @@ export default function Dashboard() {
         <p>Email: {session?.user.email}</p>
       </div>
       <ButtonStyle4
-        onClick={async () => {
-          signOut({ redirect: false }) && router.push("/");
-        }}
+        onClick={handleSignOut}
       >
         Sign out
       </ButtonStyle4>
