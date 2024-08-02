@@ -8,52 +8,145 @@ datasource db {
 }
 
 model User {
-  id                Int       @id @default(autoincrement())
-  name              String    @db.VarChar(255)
-  username          String    @unique @db.VarChar(255)
-  email             String    @unique @db.VarChar(255)
-  password          String    
-  country           String    @default("India") @db.VarChar(255)
-  contactNumber     String    @unique @db.VarChar(255)
-  address           String    @db.VarChar(255)
-  profilePic        String?
-  status            Boolean   @default(true)
-  isVendor          Boolean   @default(false)
-  isVerified        Boolean   @default(false)
-  isDeleted         Boolean   @default(false)
-  createdAt         DateTime  @default(now())
-  lastLogin         DateTime  @default(now())
-  Vendor            Vendor?
+  id            Int          @id @default(autoincrement())
+  name          String       @db.VarChar(255)
+  username      String       @unique @db.VarChar(255)
+  email         String       @unique @db.VarChar(255)
+  password      String
+  country       String       @default("India") @db.VarChar(255)
+  contactNumber String       @unique @db.VarChar(255)
+  address       String       @db.VarChar(255)
+  profilePic    String?
+  status        Boolean      @default(true)
+  role          Role         @default(user)
+  isVendor      Boolean      @default(false)
+  isVerified    Boolean      @default(false)
+  isDeleted     Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+  lastLogin     DateTime     @default(now())
+  vendor        Vendor?
+  orders        Order[]
+  reviews       Review[]
+  complaints    Complaint[]
+  queries       Query[]
+  feedbacks     Feedback[]
+  suggestions   Suggestion[]
 }
 
 model Vendor {
-  id                Int       @id @default(autoincrement())
-  userId            Int       @unique
-  companyName       String    @db.VarChar(255)
-  description       String?
-  rating            Float     @default(0)
-  totalPackages     Int       @default(0)
-  socialMediaLinks  String?
-  isVerified        Boolean   @default(false)
-  TravelPackages    TravelPackage[]
-  User              User      @relation(fields: [userId], references: [id])
+  id               Int             @id @default(autoincrement())
+  userId           Int             @unique
+  companyName      String          @db.VarChar(255)
+  description      String?
+  rating           Int             @default(0)
+  totalPackages    Int             @default(0)
+  socialMediaLinks String?
+  isVerified       Boolean         @default(false)
+  createdAt        DateTime        @default(now())
+  TravelPackages   TravelPackage[]
+  user             User            @relation(fields: [userId], references: [id])
 }
 
 model TravelPackage {
-  id           Int       @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   vendorId     Int
-  title        String    @db.VarChar(255)
-  imageUrl     String    @db.VarChar(255)
-  destination  String    @db.VarChar(255)
+  title        String   @db.VarChar(255)
+  imageUrl     String   @db.VarChar(255)
+  destination  String   @db.VarChar(255)
   durationDays Int
   description  String
-  cost         String    @db.VarChar(255)
-  rating       Int       @default(0)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @default(now())
-  status       Boolean   @default(true)
-  isFeatured   Boolean   @default(false)
-  isVerified   Boolean   @default(false)
-  isDeleted    Boolean   @default(false)
-  vendor       Vendor    @relation(fields: [vendorId], references: [id])
+  cost         String   @db.VarChar(255)
+  rating       Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+  status       Boolean  @default(true)
+  isFeatured   Boolean  @default(false)
+  isVerified   Boolean  @default(false)
+  isDeleted    Boolean  @default(false)
+  vendor       Vendor   @relation(fields: [vendorId], references: [id])
+  orders       Order[]
+  reviews      Review[]
+}
+
+model Order {
+  id          Int           @id @default(autoincrement())
+  userId      Int
+  user        User          @relation(fields: [userId], references: [id])
+  packageId   Int
+  package     TravelPackage @relation(fields: [packageId], references: [id])
+  totalAmount Float
+  status      OrderStatus
+  createdAt   DateTime      @default(now())
+  Complaint   Complaint[]
+}
+
+model Review {
+  id         Int           @id @default(autoincrement())
+  userId     Int
+  user       User          @relation(fields: [userId], references: [id])
+  packageId  Int
+  package    TravelPackage @relation(fields: [packageId], references: [id])
+  rating     Int           @default(0)
+  reviewText String?
+  createdAt  DateTime      @default(now())
+}
+
+model Complaint {
+  id             Int             @id @default(autoincrement())
+  userId         Int
+  user           User            @relation(fields: [userId], references: [id])
+  relatedOrderId Int
+  relatedOrder   Order           @relation(fields: [relatedOrderId], references: [id])
+  description    String
+  status         ComplaintStatus
+  createdAt      DateTime        @default(now())
+}
+
+model Query {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  user      User        @relation(fields: [userId], references: [id])
+  queryText String
+  response  String?
+  status    QueryStatus
+  createdAt DateTime    @default(now())
+}
+
+model Feedback {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  user         User     @relation(fields: [userId], references: [id])
+  feedbackText String
+  createdAt    DateTime @default(now())
+}
+
+model Suggestion {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  user           User     @relation(fields: [userId], references: [id])
+  suggestionText String
+  createdAt      DateTime @default(now())
+}
+
+enum Role {
+  user
+  admin
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum ComplaintStatus {
+  PENDING
+  RESOLVED
+  CLOSED
+}
+
+enum QueryStatus {
+  OPEN
+  ANSWERED
+  CLOSED
 }

@@ -1,0 +1,14 @@
+.PageContainer{
+  width: 75%;
+  height: 96%;
+  background-color: #f1faee;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 1em;
+  padding-top: 60px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

@@ -6,14 +6,14 @@ import InfoIcon from "@mui/icons-material/Info";
 import ContactlessIcon from "@mui/icons-material/Contactless";
 import HomeIcon from "@mui/icons-material/Home";
 
-export default function MainNavbar() {
+export default function MainNavbar({styleChange=false}) {
   return (
     <nav className={style["navbar-c"]}>
       <ul className={style["navbar-links-c"]}>
         <li>
           <NavButton
             customClass={style["responsive-btn"]}
-            style1={true}
+            style1={styleChange ? false : true}
             route="/"
             icon={HomeIcon}
           >
@@ -21,14 +21,14 @@ export default function MainNavbar() {
           </NavButton>
         </li>
         <li>
-          <MoreNav>
+          <MoreNav styleCustom={styleChange}>
             <li>
-              <NavButton route="/about" icon={InfoIcon}>
+              <NavButton style1={styleChange ? true : false} route="/about" icon={InfoIcon}>
                 About
               </NavButton>
             </li>
             <li>
-              <NavButton route="/contact" icon={ContactlessIcon}>
+              <NavButton style1={styleChange ? true : false} route="/contact" icon={ContactlessIcon}>
                 Contact
               </NavButton>
             </li>

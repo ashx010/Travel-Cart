@@ -238,17 +238,31 @@ export default function RegisterForm({ switchForm }) {
           />
         </FormControl>
       </div>
-      <TextField
-        error={error.address}
-        onFocus={handleFocusError}
-        id="address"
-        label="Address"
-        variant="standard"
-        name="address"
-        value={formData.address}
-        onChange={handleChange}
-        fullWidth
-      />
+      <div className={style.formFieldGroup}>
+        <TextField
+          error={error.name}
+          onFocus={handleFocusError}
+          id="country"
+          label="Country"
+          variant="standard"
+          name="country"
+          value={formData.country}
+          onChange={handleChange}
+          fullWidth
+        />
+        <TextField
+          error={error.address}
+          onFocus={handleFocusError}
+          id="address"
+          label="Address"
+          variant="standard"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          fullWidth
+          multiline
+        />
+      </div>
       <TextField
         error={error.contactNumber}
         onFocus={handleFocusError}

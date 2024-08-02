@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import { ButtonStyle3 } from "../all/styledButtons.jsx";
+import { ButtonStyle3, ButtonStyle4 } from "../all/styledButtons.jsx";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import style from "./Navbar.module.css";
 import NavButton from "./NavButton.jsx";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-export default function MoreNav({ children }) {
+export default function MoreNav({ styleCustom=false, children }) {
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -31,21 +31,23 @@ export default function MoreNav({ children }) {
     };
   }, []);
 
+  const ButtonCustom = styleCustom ? ButtonStyle4 : ButtonStyle3;
+
   return (
     <>
-      <ButtonStyle3
+      <ButtonCustom
         onClick={handleMenuBtn}
         endIcon={<UnfoldMoreIcon />}
         className={style["responsive-btn"]}
         ref={buttonRef}
       >
         Menu
-      </ButtonStyle3>
-      <div className={style["more-dropdown"]} ref={dropdownRef}>
+      </ButtonCustom>
+      <div className={ !styleCustom ? style["more-dropdown"] : style["more-dropdown-custom"]} ref={dropdownRef}>
         <ul>
           {children}
           <li>
-            <NavButton route="/dashboard" icon={AccountCircleIcon}>
+            <NavButton style1={!styleCustom ? false : true} route="/dashboard" icon={AccountCircleIcon}>
               Profile
             </NavButton>
           </li>

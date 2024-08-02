@@ -1,0 +1,135 @@
+.container-custom {
+  width: 20%;
+  height: 96%;
+  background-color: #457b9d;
+  border-radius: 2.5em;
+  overflow: hidden;
+}
+.profileIcon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px 10px #1d3557;
+  position: relative;
+  z-index: 10;
+}
+.profileIconContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+.profileIconContainer::after {
+  content: "";
+  width: 70px;
+  height: 70px;
+  background-color: transparent;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0px #1d3557;
+  z-index: 1;
+}
+.profileIconContainer::before {
+  content: "";
+  width: 70px;
+  height: 70px;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 80px;
+  border-radius: 50%;
+  box-shadow: 35px -35px 0px #1d3557;
+  z-index: 1;
+}
+.profileName {
+  color: #f1faee;
+  font-size: 2em;
+  margin-left: 1em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+.CustomList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 1em;
+  color: #f1faee;
+  list-style: none;
+}
+.CustomListItem {
+  text-transform: capitalize;
+  font-size: 1.2em;
+  width: 70%;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  background: #f1faee;
+  color: #1d3557;
+  border-radius: 1em 2em;
+  transition: transform 0.5s ease;
+  font-variant: small-caps;
+  font-weight: 600;
+}
+
+.CustomListItem:hover, .CustomListItem.active {
+  background: #1d3557;
+  color: #f1faee;
+  letter-spacing: 5px;
+  transform: translateX(20px);
+}
+
+.TablesList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 1em;
+  color: #1d3557;
+  list-style: none;
+  background: #f1faee;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 2em;
+  backdrop-filter: blur(1px);
+}
+.TablesListItem {
+  text-transform: capitalize;
+  font-size: 1.2em;
+  width: 100%;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.TablesListItem.heading {
+  font-size: 1.5em;
+  letter-spacing: 10px;
+  color: #1d3557;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+.TablesListItemSpan {
+  width: 80%;
+  transition: transform 0.5s ease;
+  margin: 0;
+  letter-spacing: 2px;
+  padding: 4px 16px;
+}
+
+.TablesListItem:hover .TablesListItemSpan,
+.TablesListItem.active .TablesListItemSpan {
+  background: #1d3557;
+  color: #f1faee;
+  border-radius: 2em 1em;
+  text-align: right;
+  transform: translateX(20px);
+  letter-spacing: 5px;
+  font-variant: small-caps;
+}

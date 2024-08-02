@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.OverviewInfoContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.OverviewInfoCard{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 200px;
+  border-radius: 1em;
+  margin: 1em;
+}
+
+.OverviewInfoCardHeader{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 4px 16px;
+}
+
+.OverviewInfoCardTitle{
+  font-size: 1em;
+  font-weight: 400;
+  margin: 0;
+}
+
+.OverviewInfoCardData{
+  font-size: 2em;
+  font-weight: 600;
+  margin: 0;
+  padding: 0px 12px;
+}
+
+.OverviewInfoCardDataFooter{
+  font-size: 0.8em;
+  font-weight: 400;
+  margin: 0;
+  width: 100%;
+  background-color: #274c77;
+  padding: 8px;
+  border-radius: 0 0 1em 1em;
+  color: white;
+}
