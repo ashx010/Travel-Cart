@@ -8,7 +8,7 @@ import HomeIcon from "@mui/icons-material/Home";
 
 export default function MainNavbar({styleChange=false}) {
   return (
-    <nav className={style["navbar-c"]}>
+    <nav className={style["navbar-c"]} id="navbar-c">
       <ul className={style["navbar-links-c"]}>
         <li>
           <NavButton

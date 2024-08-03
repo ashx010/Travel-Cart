@@ -1,11 +1,9 @@
 .navbar-c {
   list-style: none;
   display: flex;
-  justify-content: flex-end;
   padding: 2% 1% 1% 1%;
   background-color: transparent;
   color: rgb(0, 0, 0);
-  align-items: center;
   border-radius: 1rem;
   width: 100%;
   font-size: 1.2em;
@@ -15,6 +13,14 @@
   left: 0;
   z-index: 1000;
   transition: all 0.2s ease-in-out;
+  overflow: hidden;
+  height: 5rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.navbar-c.navbar-c-show{
+  height: 20rem;
 }
 
 ul.navbar-links-c {
@@ -34,14 +40,14 @@ ul.navbar-links-c {
 
 .navbar-c div.more-dropdown{
   position: absolute;
-  top: 100%;
+  bottom: 2rem;
   right: 1.2%;
   background-color: #f1faee;
   border-radius: 2rem;
   width: 12%;
   transition: all 0.2s ease-in-out;
   z-index: 100;
-  transform: translateX(500%);
+  transform: translateX(300%);
   border: 1px solid #1d3557;
 }
 
@@ -75,14 +81,14 @@ ul.navbar-links-c {
 
 .navbar-c div.more-dropdown-custom{
   position: absolute;
-  top: 100%;
+  bottom: 2rem;
   right: 1.2%;
   background-color: #1d3557;
   border-radius: 2rem;
   width: 12%;
   transition: all 0.2s ease-in-out;
   z-index: 100;
-  transform: translateX(500%);
+  transform: translateX(300%);
   border: 1px solid #f1faee;
 }
 
@@ -209,9 +215,8 @@ ul.navbar-links-c {
 @media (max-width: 500px) {
   .navbar-c {
     padding: 2%;
-    width: 100%;
     font-size: 1.1em;
-    justify-content: center;
+    height: 4rem;
   }
 
   .navbar-c li {

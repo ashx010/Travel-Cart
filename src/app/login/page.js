@@ -5,6 +5,7 @@ import Image from "next/image";
 import { SessionWrapper } from "@/components/SessionWrapper";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import Navbar from "@/components/Navbar/Navbar";
 
 export const metadata = {
   title: "Auth Page",
@@ -17,6 +18,8 @@ export default async function login() {
     redirect("/dashboard");
   }
   return (
+    <>
+    <Navbar styleChange={false} />
     <div className={style.container}>
       <div className={style.imageContainer}>
         <Image
@@ -36,5 +39,6 @@ export default async function login() {
         <AuthComponent />
       </SessionWrapper>
     </div>
+    </>
   );
 }

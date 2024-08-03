@@ -12,6 +12,7 @@ export default function MoreNav({ styleCustom=false, children }) {
 
   const handleMenuBtn = () => {
     dropdownRef.current.classList.toggle(style["show"]);
+    document.getElementById("navbar-c").classList.toggle(style["navbar-c-show"]);
   };
 
   useEffect(() => {
@@ -22,6 +23,7 @@ export default function MoreNav({ styleCustom=false, children }) {
         !buttonRef.current.contains(event.target)
       ) {
         dropdownRef.current.classList.remove(style["show"]);
+        document.getElementById("navbar-c").classList.toggle(style["navbar-c-show"]);
       }
     };
 
