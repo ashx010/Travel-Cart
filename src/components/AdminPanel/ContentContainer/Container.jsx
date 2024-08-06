@@ -9,16 +9,20 @@ const Overview = dynamic(
   { ssr: false }
 );
 
+const Tables = dynamic(
+  () => import("@/components/AdminPanel/Tabs/Tables/Tables"),
+  { ssr: false }
+);
+
 export default function Container() {
   const { tabsState } = useTab();
 
-  console.log(tabsState);
   return (
     <div className={style["PageContainer"]}>
       {tabsState.overview && <Overview />}
-      {tabsState.User && <h1>User</h1>}
-      {tabsState.Vendors && <h1>Vendors</h1>}
-      {tabsState.Packages && <h1>Packages</h1>}
+      {tabsState.User && <Tables table_name="user" />}
+      {tabsState.Vendors && <Tables table_name="vendor" />}
+      {tabsState.Packages && <Tables table_name="travelPackage" />}
     </div>
   );
 }

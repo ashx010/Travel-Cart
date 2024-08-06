@@ -23,7 +23,7 @@ export default function MoreNav({ styleCustom=false, children }) {
         !buttonRef.current.contains(event.target)
       ) {
         dropdownRef.current.classList.remove(style["show"]);
-        document.getElementById("navbar-c").classList.toggle(style["navbar-c-show"]);
+        document.getElementById("navbar-c").classList.remove(style["navbar-c-show"]);
       }
     };
 

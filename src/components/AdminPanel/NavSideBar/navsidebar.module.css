@@ -74,11 +74,12 @@
   font-weight: 600;
 }
 
-.CustomListItem:hover, .CustomListItem.active {
-  background: #1d3557;
-  color: #f1faee;
+.CustomListItem:hover,
+.CustomListItem.active {
+  background: #a8dadc;
+  color: #1d3557;
   letter-spacing: 5px;
-  transform: translateX(20px);
+  transform: translateX(50px);
 }
 
 .TablesList {
@@ -125,11 +126,117 @@
 
 .TablesListItem:hover .TablesListItemSpan,
 .TablesListItem.active .TablesListItemSpan {
-  background: #1d3557;
-  color: #f1faee;
+  background: #a8dadc;
+  color: #1d3557;
   border-radius: 2em 1em;
   text-align: right;
   transform: translateX(20px);
   letter-spacing: 5px;
   font-variant: small-caps;
+}
+
+@media (max-width: 1024px) {
+  .container-custom {
+    width: 20%;
+    border-radius: 2em 1em;
+  }
+  .TablesListItem:hover .TablesListItemSpan,
+  .TablesListItem.active .TablesListItemSpan {
+    transform: translateX(10px);
+    letter-spacing: 2px;
+    border-radius: 1em;
+  }
+  .CustomListItem {
+    font-size: 1.2em;
+    padding: 4px 12px;
+    border-radius: 1em;
+  }
+  .CustomListItem:hover,
+  .CustomListItem.active {
+    letter-spacing: 2px;
+    transform: translateX(20px);
+    border-radius: 1em;
+  }
+  .profileName {
+    font-size: 1.5em;
+    margin-left: 1em;
+    letter-spacing: 2px;
+  }
+
+  .profileIcon {
+    width: 50px;
+    height: 50px;
+  }
+  .profileIconContainer::after {
+    width: 50px;
+    height: 50px;
+    top: 60px;
+    box-shadow: 25px -25px 0px #1d3557;
+  }
+  .profileIconContainer::before {
+    width: 50px;
+    height: 50px;
+    right: 60px;
+    box-shadow: 25px -25px 0px #1d3557;
+  }
+}
+
+@media (max-width: 850px) {
+  .container-custom{
+    position: absolute;
+    z-index: 100;
+    width: 70px;
+    right: 5%;
+    bottom: 2%;
+    left: unset;
+    top: unset;
+    height: auto;
+    padding-bottom: 1em;
+    border-radius: 3em 2em;
+    transition: all 0.3s ease;
+    box-shadow: 0px 0px 5px #1d355788;
+    border: 8px solid #f1faee;
+  }
+  .container-custom.active{
+    width: 40%;
+    border: 1em solid #f1faee;
+    box-shadow: 0px 0px 100px 2px #1d3557c5;
+  }
+  .profileIconContainer{
+    cursor: pointer;
+  }
+  .profileIcon {
+    box-shadow: 0px 0px 0px 10px #f1faee;
+  }
+  .profileIconContainer::after {
+    box-shadow: 25px -25px 0px #f1faee;
+  }
+  .profileIconContainer::before {
+    box-shadow: 25px -25px 0px #f1faee;
+  }
+  .CustomList{
+    display: none;
+  }
+  .TablesList{
+    display: none;
+  }
+  .CustomList.active{
+    display: flex;
+  }
+  .TablesList.active{
+    display: flex;
+  }
+  .profileName{
+    display: none;
+  }
+  .profileName.active{
+    display: block;
+  }
+
+}
+
+@media (max-width: 500px) {
+  .container-custom.active{
+    width: 70%;
+  }
 }

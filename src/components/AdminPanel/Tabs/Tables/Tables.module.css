@@ -1,0 +1,79 @@
+.ParentContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3em;
+}
+.TableContainer {
+  width: 100%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 4px 1em;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+}
+.TableContainer::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.TableContainer::-webkit-scrollbar-thumb {
+  background: #A8DADC;
+  border: 1px solid var(--white);
+  border-radius: 2px;
+}
+.Table {
+  width: 100%;
+}
+.TableHeader {
+  width: 100%;
+  border-bottom: 1px solid #1d3557;
+}
+.TableHeaderItem {
+  font-size: 1em;
+  font-weight: bold;
+  color: #1d3557;
+  padding: 12px 24px;
+  text-transform: uppercase;
+}
+
+.TableRow {
+  width: 100%;
+  border-bottom: 1px solid #1d355780;
+}
+
+.TableBodyItem {
+  font-size: 0.9em;
+  color: #1d3557;
+  padding: 12px 24px;
+}
+.TableTitle {
+  font-size: 5em;
+  margin-bottom: 16px;
+  color: #1d3557;
+  width: 100%;
+  text-align: start;
+  letter-spacing: 5px;
+  position: absolute;
+  top: 0;
+  left: 16px;
+  text-transform: uppercase;
+}
+.TableResult {
+  font-size: 2em;
+  margin-bottom: 16px;
+  color: #ef476f;
+  width: 100%;
+  text-align: start;
+  letter-spacing: 5px;
+}
+.TableFooter {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 2em;
+  align-items: center;
+}

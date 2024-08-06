@@ -20,9 +20,15 @@ import style from "./AuthComponent.module.css";
 import { canada, LTR } from "@/app/fonts";
 import classNames from "classnames";
 import { useRouter } from "next/navigation";
-import LinearProgress, {linearProgressClasses} from "@mui/material/LinearProgress";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
 
-export default function RegisterForm({ switchForm }) {
+export default function RegisterForm({
+  switchForm,
+  needSwitch = true,
+  customFormStyle = [],
+}) {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
@@ -100,15 +106,28 @@ export default function RegisterForm({ switchForm }) {
         setErrorMessage("");
         setErrorStyleColor("#e63946");
         setProgressState(false);
-        switchForm();
+        if (needSwitch) {
+          switchForm();
+        } else {
+          setFormData({
+            name: "",
+            username: "",
+            email: "",
+            password: "",
+            repassword: "",
+            country: "India",
+            contactNumber: "",
+            address: "",
+          });
+        }
       }, 1000);
-    } else if(result.result === "required"){
+    } else if (result.result === "required") {
       setErrorMessage("Please fill all the fields");
       setProgressState(false);
       setTimeout(() => {
         setErrorMessage("");
       }, 3000);
-    } else if(result.result === "user_exists"){
+    } else if (result.result === "user_exists") {
       setErrorMessage("User already exists");
       setProgressState(false);
       setTimeout(() => {
@@ -143,16 +162,20 @@ export default function RegisterForm({ switchForm }) {
     width: "100%",
     borderRadius: "50%",
     [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: '#457B9D',
+      backgroundColor: "#457B9D",
     },
     [`& .${linearProgressClasses.bar}`]: {
       borderRadius: "50%",
-      backgroundColor: '#1d3557',
+      backgroundColor: "#1d3557",
     },
   }));
 
   return (
-    <form className={style.formContainer} onSubmit={handleRegisterEvent}>
+    <form
+      className={style.formContainer}
+      onSubmit={handleRegisterEvent}
+      style={customFormStyle && { ...customFormStyle }}
+    >
       {progressState && <CustomLinearProgress />}
       <div className={style.formFieldGroup}>
         <TextField
@@ -282,9 +305,11 @@ export default function RegisterForm({ switchForm }) {
         >
           Register
         </SubmitButton>
-        <p onClick={switchForm} className={style.loginLink}>
-          Already have an account? Login
-        </p>
+        {needSwitch && (
+          <p onClick={switchForm} className={style.loginLink}>
+            Already have an account? Login
+          </p>
+        )}
       </div>
       {errorMessage && (
         <h3

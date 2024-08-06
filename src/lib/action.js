@@ -90,6 +90,27 @@ export const handleUserData = async () => {
   }
 };
 
+export const handleAdminTableData = async ({ table_name }, skip, take) => {
+  try {
+    const count = await prisma[table_name].count();
+    const result = await prisma[table_name].findMany({
+      skip,
+      take,
+      orderBy: {
+        id: "desc",
+      },
+    });
+
+    if (result.length === 0) {
+      return { result: "empty" };
+    }
+    return { result, count };
+  } catch (error) {
+    console.error(error);
+    return { result: "failed" };
+  }
+};
+
 export async function handleOverviewData() {
   try {
     const currentDate = new Date();
@@ -238,21 +259,51 @@ export async function handleOverviewData() {
 
     const percentChange = (currentCount, newThisMonthCount) => {
       if (currentCount === 0) return 0;
-      return ((newThisMonthCount / (currentCount - newThisMonthCount)) * 100);
+      return (newThisMonthCount / (currentCount - newThisMonthCount)) * 100;
     };
-    
+
     // Usage:
-    const percentThisUsersCount = percentChange(currentUsersCount, thisMonthUsersCount);
-    const percentThisVendorsCount = percentChange(currentVendorsCount, thisMonthVendorsCount);
-    const percentThisPackagesCount = percentChange(currentPackagesCount, thisMonthPackagesCount);
-    const percentThisOrdersCount = percentChange(currentOrdersCount, thisMonthOrdersCount);
+    const percentThisUsersCount = percentChange(
+      currentUsersCount,
+      thisMonthUsersCount
+    );
+    const percentThisVendorsCount = percentChange(
+      currentVendorsCount,
+      thisMonthVendorsCount
+    );
+    const percentThisPackagesCount = percentChange(
+      currentPackagesCount,
+      thisMonthPackagesCount
+    );
+    const percentThisOrdersCount = percentChange(
+      currentOrdersCount,
+      thisMonthOrdersCount
+    );
     const percentThisRevenue = percentChange(currentRevenue, thisMonthRevenue);
-    const percentThisReviewsCount = percentChange(currentReviewsCount, thisMonthReviewsCount);
-    const percentThisRatingsCount = percentChange(currentRatingsCount, thisMonthRatingsCount);
-    const percentThisComplaintsCount = percentChange(currentComplaintsCount, thisMonthComplaintsCount);
-    const percentThisQueriesCount = percentChange(currentQueriesCount, thisMonthQueriesCount);
-    const percentThisFeedbacksCount = percentChange(currentFeedbacksCount, thisMonthFeedbacksCount);
-    const percentThisSuggestionsCount = percentChange(currentSuggestionsCount, thisMonthSuggestionsCount);
+    const percentThisReviewsCount = percentChange(
+      currentReviewsCount,
+      thisMonthReviewsCount
+    );
+    const percentThisRatingsCount = percentChange(
+      currentRatingsCount,
+      thisMonthRatingsCount
+    );
+    const percentThisComplaintsCount = percentChange(
+      currentComplaintsCount,
+      thisMonthComplaintsCount
+    );
+    const percentThisQueriesCount = percentChange(
+      currentQueriesCount,
+      thisMonthQueriesCount
+    );
+    const percentThisFeedbacksCount = percentChange(
+      currentFeedbacksCount,
+      thisMonthFeedbacksCount
+    );
+    const percentThisSuggestionsCount = percentChange(
+      currentSuggestionsCount,
+      thisMonthSuggestionsCount
+    );
 
     return {
       currentUsersCount,
@@ -294,3 +345,21 @@ export async function handleOverviewData() {
     throw error;
   }
 }
+
+export const handleDeleteRecords = async ({ table_name }, selectRow) => {
+  
+  try {
+    const deleteRecords = await prisma[table_name].deleteMany({
+      where: {
+        id: {
+          in: selectRow,
+        },
+      },
+    });
+
+    return { result: "success" };
+  } catch (error) {
+    console.error(error);
+    return { result: "failed" };
+  }
+};

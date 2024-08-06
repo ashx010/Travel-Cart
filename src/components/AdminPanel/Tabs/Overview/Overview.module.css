@@ -46,6 +46,7 @@
   font-weight: 600;
   margin: 0;
   padding: 0px 12px;
+  width: 100%;
 }
 
 .OverviewInfoCardDataFooter{
@@ -57,4 +58,11 @@
   padding: 8px;
   border-radius: 0 0 1em 1em;
   color: white;
+}
+
+@media (max-width: 850px) {
+  .OverviewInfoContainer {
+    margin-top: 3em;
+  }
+  
 }

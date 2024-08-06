@@ -1,0 +1,127 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1em;
+  margin: 1em 0;
+  width: 100%;
+  padding: 0 2em;
+}
+.search-box {
+  width: 50%;
+}
+.filter-box {
+  width: 100%;
+}
+.filter-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+.filter-item {
+  padding: 0 1em 0 0;
+  position: relative;
+}
+.dropdownContainer {
+  width: 14rem;
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background: #a8dadc;
+  color: #1d3557;
+  padding: 0.5em 2em;
+  border-radius: 0em 4px 4px 2em;
+  height: 12rem;
+  overflow: auto;
+  transform: translateX(-200%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 100;
+  border: 2px solid #1d3557;
+}
+.dropdownContainer.active {
+  transform: translateX(0);
+}
+.dropdownContainer::-webkit-scrollbar, .dropdownContainer2::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+  padding: 4px;
+}
+.dropdownContainer::-webkit-scrollbar-thumb, .dropdownContainer2::-webkit-scrollbar-thumb {
+  background: #1d3557;
+  border-radius: 1px;
+}
+.dropDownLabel{
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.dropdownContainer2{
+  width: 12rem;
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background: #a8dadc;
+  color: #1d3557;
+  padding: 0.5em 2em;
+  border-radius: 0em 4px 4px 2em;
+  height: 8rem;
+  overflow: auto;
+  transform: translateX(-500%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 100;
+  border: 2px solid #1d3557;
+}
+.dropdownContainer2.active {
+  transform: translateX(0);
+}
+.dropdown-item{
+  cursor: pointer;
+}
+.dropdown-item2{
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+.addnewContainer{
+  width: 40rem;
+  position: absolute;
+  top: 140%;
+  left: 0;
+  background: #a8dadc;
+  color: #1d3557;
+  padding: 0;
+  border-radius: 0em 4px 4px 2em;
+  overflow: auto;
+  transform: translateX(-500%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 100;
+  border: 2px solid #1d3557;
+}
+.addnewContainer.active {
+  transform: translateX(0);
+}
+.deleteRecordContainer{
+  width: 12rem;
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background: #a8dadc;
+  color: #1d3557;
+  padding: 0.5em 2em;
+  border-radius: 0em 4px 4px 2em;
+  overflow: auto;
+  transform: translateX(-500%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 100;
+  border: 2px solid #1d3557;
+}
+.deleteRecordContainer.active {
+  transform: translateX(0);
+}
+
+@media (max-width: 1280px) {
+  .addnewContainer.active {
+    transform: translateX(-30%);
+  }
+}

@@ -8,6 +8,7 @@ import { LTR, font2 } from "@/app/fonts";
 import classNames from "classnames";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+import Skeleton from "@mui/material/Skeleton";
 
 const fetcher = async () => {
   const { handleOverviewData } = await import("@/lib/action");
@@ -89,10 +90,10 @@ export default function Overview() {
     refreshInterval: 60000,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  // if (isLoading) return <Skeleton variant="rectangular" animation="wave" style={{width: "100%", height: "100%"}} />;
 
-  if (error)
-    return <div>Error loading overview data. Please try again later.</div>;
+  // if (error)
+  //   return <div>Error loading overview data. Please try again later.</div>;
 
   return (
     <div className={style.container}>
@@ -117,27 +118,47 @@ export default function Overview() {
               <AnalyticsIcon />
             </div>
             <div className={style["OverviewInfoCardData"]}>
-              <h1>{data["current" + card.key]}</h1>
+              {isLoading ? (
+                <Skeleton
+                  animation="wave"
+                />
+              ) : error ? (
+                <h1>Error!!</h1>
+              ) : (
+                <h1>{data["current" + card.key]}</h1>
+              )}
             </div>
             <div className={style["OverviewInfoCardDataFooter"]}>
-              <h1>
-                {data["percentThis" + card.key] >= 0 ? (
-                  <>
-                    <span style={{ color: "#80ed99" }}>
-                      {data["percentThis" + card.key]}%
-                    </span>
-                    <TrendingUpIcon sx={{ color: "#80ed99", fontSize: "12px" }} />
-                  </>
-                ) : (
-                  <>
-                    <span style={{ color: "#e63946" }}>
-                      {data["percentThis" + card.key]}%
-                    </span>
-                    <TrendingDownIcon sx={{ color: "#e63946", fontSize: "12px" }} />
-                  </>
-                )}{" "}
-                [ {data["thisMonth" + card.key]} ] over this month.
-              </h1>
+              {isLoading ? (
+                <Skeleton
+                  animation="wave"
+                />
+              ) : error ? (
+                <h1>Error!!</h1>
+              ) : (
+                <h1>
+                  {data["percentThis" + card.key] >= 0 ? (
+                    <>
+                      <span style={{ color: "#80ed99" }}>
+                        {data["percentThis" + card.key]}%
+                      </span>
+                      <TrendingUpIcon
+                        sx={{ color: "#80ed99", fontSize: "12px" }}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <span style={{ color: "#e63946" }}>
+                        {data["percentThis" + card.key]}%
+                      </span>
+                      <TrendingDownIcon
+                        sx={{ color: "#e63946", fontSize: "12px" }}
+                      />
+                    </>
+                  )}{" "}
+                  [ {data["thisMonth" + card.key]} ] over this month.
+                </h1>
+              )}
             </div>
           </div>
         ))}

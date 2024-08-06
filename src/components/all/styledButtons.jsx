@@ -46,6 +46,7 @@ export const ButtonStyle4 = styled(Button)({
   padding: "0.3rem 1.5rem",
   border: "2px solid transparent",
   zIndex: 1000,
+  backdropFilter: "blur(2px)",
   "&:hover": {
     backgroundColor: "#a8dadc",
     color: "#1d3557",

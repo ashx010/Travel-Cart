@@ -6,3 +6,10 @@
   justify-content: space-around;
   align-items: center;
 }
+
+@media (max-width: 850px) {
+  .LayoutBackground {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}

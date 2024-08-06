@@ -11,4 +11,24 @@
   padding-top: 60px;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
+}
+
+.PageContainer::-webkit-scrollbar{
+  width: 4px;
+  height: 4px;
+}
+
+.PageContainer::-webkit-scrollbar-thumb{
+  background-color: #457b9d;
+  border-radius: 2px;
+}
+
+@media (max-width: 850px) {
+  .PageContainer {
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+    border-radius: 0;
+  }
 }
