@@ -19,9 +19,10 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
 }
 .filter-item {
-  padding: 0 1em 0 0;
+  margin: 4px;
   position: relative;
 }
 .dropdownContainer {
@@ -37,27 +38,29 @@
   overflow: auto;
   transform: translateX(-200%);
   transition: transform 0.3s ease-in-out;
-  z-index: 100;
+  z-index: 1010;
   border: 2px solid #1d3557;
 }
 .dropdownContainer.active {
   transform: translateX(0);
 }
-.dropdownContainer::-webkit-scrollbar, .dropdownContainer2::-webkit-scrollbar {
+.dropdownContainer::-webkit-scrollbar,
+.dropdownContainer2::-webkit-scrollbar {
   width: 2px;
   height: 2px;
   padding: 4px;
 }
-.dropdownContainer::-webkit-scrollbar-thumb, .dropdownContainer2::-webkit-scrollbar-thumb {
+.dropdownContainer::-webkit-scrollbar-thumb,
+.dropdownContainer2::-webkit-scrollbar-thumb {
   background: #1d3557;
   border-radius: 1px;
 }
-.dropDownLabel{
+.dropDownLabel {
   font-size: 0.8em;
   font-weight: 500;
 }
 
-.dropdownContainer2{
+.dropdownContainer2 {
   width: 12rem;
   position: absolute;
   top: 120%;
@@ -70,20 +73,20 @@
   overflow: auto;
   transform: translateX(-500%);
   transition: transform 0.3s ease-in-out;
-  z-index: 100;
+  z-index: 1010;
   border: 2px solid #1d3557;
 }
 .dropdownContainer2.active {
   transform: translateX(0);
 }
-.dropdown-item{
+.dropdown-item {
   cursor: pointer;
 }
-.dropdown-item2{
+.dropdown-item2 {
   margin-bottom: 8px;
   cursor: pointer;
 }
-.addnewContainer{
+.addnewContainer {
   width: 40rem;
   position: absolute;
   top: 140%;
@@ -95,13 +98,13 @@
   overflow: auto;
   transform: translateX(-500%);
   transition: transform 0.3s ease-in-out;
-  z-index: 100;
+  z-index: 1010;
   border: 2px solid #1d3557;
 }
 .addnewContainer.active {
   transform: translateX(0);
 }
-.deleteRecordContainer{
+.deleteRecordContainer {
   width: 12rem;
   position: absolute;
   top: 120%;
@@ -113,15 +116,40 @@
   overflow: auto;
   transform: translateX(-500%);
   transition: transform 0.3s ease-in-out;
-  z-index: 100;
+  z-index: 1010;
   border: 2px solid #1d3557;
 }
 .deleteRecordContainer.active {
   transform: translateX(0);
 }
 
+.RegisterFormClassCustom {
+  width: 94% !important;
+}
+
 @media (max-width: 1280px) {
   .addnewContainer.active {
-    transform: translateX(-30%);
+    transform: translateX(-45%);
+  }
+}
+
+@media (max-width: 500px) {
+  .addnewContainer {
+    width: 30rem;
+  }
+  .addnewContainer.active {
+    transform: translateX(-20%);
+  }
+  .RegisterFormClassCustom {
+    width: 90% !important;
+  }
+  .addnewContainer {
+    width: 20rem;
+  }
+  .addnewContainer.active {
+    transform: translateX(-5%);
+  }
+  .dropdownContainer2.active {
+    transform: translateX(-45%);
   }
 }

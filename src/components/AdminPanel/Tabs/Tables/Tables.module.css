@@ -77,3 +77,16 @@
   padding-left: 2em;
   align-items: center;
 }
+
+@media (max-width: 850px) {
+  .TableTitle{
+    font-size: 3em;
+    top: 30px;
+  }
+  .ParentContainer{
+    margin-top: 5em;
+  }
+  .TableFooter {
+    justify-content: flex-start;
+  }
+}

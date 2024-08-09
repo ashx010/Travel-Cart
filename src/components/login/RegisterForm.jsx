@@ -172,9 +172,8 @@ export default function RegisterForm({
 
   return (
     <form
-      className={style.formContainer}
+      className={classNames(style.formContainer, customFormStyle)}
       onSubmit={handleRegisterEvent}
-      style={customFormStyle && { ...customFormStyle }}
     >
       {progressState && <CustomLinearProgress />}
       <div className={style.formFieldGroup}>

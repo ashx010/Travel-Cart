@@ -212,7 +212,7 @@ export default function Filter({
               Add New
             </ButtonStyle4>
             <div ref={dropdownRef3} className={style["addnewContainer"]}>
-              {table_name.table_name === "user" ? <RegisterForm needSwitch={false} customFormStyle={{width: "94%"}} /> : ""}
+              {table_name.table_name === "user" ? <RegisterForm needSwitch={false} customFormStyle={style.RegisterFormClassCustom} /> : ""}
             </div>
           </li>
           <li className={style["filter-item"]}>
