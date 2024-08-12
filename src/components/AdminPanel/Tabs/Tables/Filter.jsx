@@ -19,7 +19,8 @@ export default function Filter({
   setShowDelete,
   handleDeleteRecords,
   setSelectDelete,
-  showDelete
+  showDelete,
+  handleSearch,
 }) {
   const [searchBox, setSearchBox] = useState("");
   const [selectRows, setSelectRows] = useState(take);
@@ -33,8 +34,8 @@ export default function Filter({
   const buttonRef2 = useRef(null);
   const buttonRef3 = useRef(null);
   const buttonRef4 = useRef(null);
-  const searchBoxRef = useRef(null);
   const selectRowsRef = useRef(null);
+  const buttonSearchRef = useRef(null);
 
   const handleDropDown1 = (event) => {
     if (event.target.name === "selectColumns") {
@@ -106,17 +107,27 @@ export default function Filter({
     <div className={classNames(style["container"], LTR.className)}>
       <div className={style["search-box"]}>
         <TextField
-          ref={searchBoxRef}
           id="search"
           label="Search"
           variant="standard"
           name="search"
+          style={{ width: "80%" }}
           value={searchBox}
           onChange={(event) => {
             setSearchBox(event.target.value);
           }}
-          fullWidth
         />
+        <ButtonStyle4
+          ref={buttonSearchRef}
+          size="small"
+          name="searchBtn"
+          style={{ fontSize: "0.75em"}}
+          onClick={() => {
+            handleSearch(searchBox);
+          }}
+        >
+          Search
+        </ButtonStyle4>
       </div>
       <div className={style["filter-box"]}>
         <ul className={style["filter-list"]}>
@@ -212,7 +223,14 @@ export default function Filter({
               Add New
             </ButtonStyle4>
             <div ref={dropdownRef3} className={style["addnewContainer"]}>
-              {table_name.table_name === "user" ? <RegisterForm needSwitch={false} customFormStyle={style.RegisterFormClassCustom} /> : ""}
+              {table_name.table_name === "user" ? (
+                <RegisterForm
+                  needSwitch={false}
+                  customFormStyle={style.RegisterFormClassCustom}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </li>
           <li className={style["filter-item"]}>
@@ -231,19 +249,21 @@ export default function Filter({
               Delete Record
             </ButtonStyle4>
             <ul ref={dropdownRef4} className={style["deleteRecordContainer"]}>
-              {showDelete && <li className={style["dropdown-item2"]}>
-                <ButtonStyle4
-                  size="small"
-                  style={{ fontSize: "0.8em" }}
-                  onClick={() => {
-                    setShowDelete(false);
-                    setSelectDelete([]);
-                    dropdownRef4.current.classList.toggle(style["active"]);
-                  }}
-                >
-                  Cancel
-                </ButtonStyle4>
-              </li>}
+              {showDelete && (
+                <li className={style["dropdown-item2"]}>
+                  <ButtonStyle4
+                    size="small"
+                    style={{ fontSize: "0.8em" }}
+                    onClick={() => {
+                      setShowDelete(false);
+                      setSelectDelete([]);
+                      dropdownRef4.current.classList.toggle(style["active"]);
+                    }}
+                  >
+                    Cancel
+                  </ButtonStyle4>
+                </li>
+              )}
               <li className={style["dropdown-item2"]}>
                 <ButtonStyle4
                   size="small"

@@ -9,6 +9,7 @@ import { useTab } from "@/Context/AdminPanelTabSelectContext/TabSelectContext";
 
 export default function NavSideBar({
   tablesList = ["User", "Vendors", "Packages"],
+  table_name=["user", "vendor", "travelPackage"]
 }) {
   const { tabsState, setTabsState } = useTab();
   const [windowCheck, setWindowCheck] = useState(false);
@@ -83,20 +84,20 @@ export default function NavSideBar({
         >
           Tables
         </li>
-        {tablesList.map((table_name, index) => (
+        {tablesList.map((tableItem, index) => (
           <li
             key={index}
             className={classNames(
               style.TablesListItem,
-              tabsState[table_name] && style.active
+              tabsState[table_name[index]] && style.active
             )}
           >
             <p
-              data={table_name}
+              data={table_name[index]}
               onClick={handleTabState}
               className={style.TablesListItemSpan}
             >
-              {table_name}
+              {tableItem}
             </p>
           </li>
         ))}

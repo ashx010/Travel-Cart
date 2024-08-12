@@ -9,14 +9,27 @@ export default async function Admin() {
 
   if (session?.user?.role !== "admin" && !session) {
     return redirect("/dashboard");
-  }
-  
-  else { 
+  } else {
+    const table_name = ["user", "vendor", "travelPackage", "order", "review", "complaint", "query", "feedback", "suggestion"];
+    const tablesList = ["User", "Vendors", "Packages", "Orders", "Reviews", "Complaints", "Queries", "Feedback", "Suggestions"];
     return (
-    <TabProvider>
-      <NavSideBar />
-      <Container />
-    </TabProvider>
-  );
+      <TabProvider
+        table_name={{
+          overview: true,
+          user: false,
+          vendor: false,
+          travelPackage: false,
+          order: false,
+          review: false,
+          complaint: false,
+          query: false,
+          feedback: false,
+          suggestion: false,
+        }}
+      >
+        <NavSideBar tablesList={tablesList} table_name={table_name} />
+        <Container table_name={table_name} />
+      </TabProvider>
+    );
   }
 }

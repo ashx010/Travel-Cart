@@ -14,15 +14,19 @@ const Tables = dynamic(
   { ssr: false }
 );
 
-export default function Container() {
+export default function Container({
+  table_name=["user", "vendor", "travelPackage"]
+}) {
   const { tabsState } = useTab();
+
+  console.log(Object.keys(tabsState));
 
   return (
     <div className={style["PageContainer"]}>
       {tabsState.overview && <Overview />}
-      {tabsState.User && <Tables table_name="user" />}
-      {tabsState.Vendors && <Tables table_name="vendor" />}
-      {tabsState.Packages && <Tables table_name="travelPackage" />}
+      {table_name.map((table, index) => (
+        tabsState[table] && <Tables key={index+table} table_name={table} />
+      ))}
     </div>
   );
 }

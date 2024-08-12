@@ -11,6 +11,7 @@ import Filter from "./Filter";
 import Skeleton from "@mui/material/Skeleton";
 import Checkbox from "@mui/material/Checkbox";
 import Alert from "@mui/material/Alert";
+import { ButtonStyle4 } from "@/components/all/styledButtons";
 
 export default function Tables(table_name = "user") {
   const [skip, setSkip] = useState(0);
@@ -20,20 +21,30 @@ export default function Tables(table_name = "user") {
   const [columnFilter, setColumnFilter] = useState({ selectAll: false });
   const [selectDelete, setSelectDelete] = useState([]);
   const [showDelete, setShowDelete] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const fetcher = async (table_name, skip, take) => {
+  const fetcher = async (table_name, skip, take, searchQuery) => {
     const { handleAdminTableData } = await import("@/lib/action");
-    return handleAdminTableData(table_name, skip, take);
+    return handleAdminTableData(table_name, skip, take, searchQuery);
   };
 
   const { data, error, isLoading } = useSWR(
-    [table_name, skip, take],
-    () => fetcher(table_name, skip, take),
+    [table_name, skip, take, searchQuery],
+    () => fetcher(table_name, skip, take, searchQuery),
     {
       revalidateOnFocus: false,
       refreshInterval: 300000,
     }
   );
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    setPage(1);
+    setSkip(0);
+    setSelectDelete([]);
+    setShowDelete(false);
+    mutate([table_name, 0, take]);
+  };
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -45,6 +56,7 @@ export default function Tables(table_name = "user") {
     setSkip(0);
     setSelectDelete([]);
     setShowDelete(false);
+    setSearchQuery("");
     mutate([table_name, 0, take]);
   };
 
@@ -95,7 +107,7 @@ export default function Tables(table_name = "user") {
     handlePageChange(null, 1);
   };
 
-  const handleDeleteRecords = async() => {
+  const handleDeleteRecords = async () => {
     const { handleDeleteRecords } = require("@/lib/action");
     const result = await handleDeleteRecords(table_name, selectDelete);
     console.log(result);
@@ -107,7 +119,7 @@ export default function Tables(table_name = "user") {
 
   const handleSelectDeleteRecords = (event) => {
     let id = parseInt(event.target.name);
-    if(selectDelete.includes(id)){
+    if (selectDelete.includes(id)) {
       let new_selectDelete = selectDelete.filter((x) => x !== id);
       setSelectDelete(new_selectDelete);
     }
@@ -128,9 +140,19 @@ export default function Tables(table_name = "user") {
           style={{ width: "100%", height: "60vh", borderRadius: "1em" }}
         />
       ) : error ? (
-        <h1 className={classNames(style["TableResult"], LTR.className)}>
-          Failed to load data!!
-        </h1>
+        <>
+          <h1 className={classNames(style["TableResult"], LTR.className)}>
+            Failed to load data!!
+          </h1>
+          <ButtonStyle4
+            size="small"
+            style={{ fontSize: "0.8em" }}
+            name="refresh"
+            onClick={handleRefetch}
+          >
+            Refresh
+          </ButtonStyle4>
+        </>
       ) : (
         <>
           {data && data.result && data.count && (
@@ -145,17 +167,38 @@ export default function Tables(table_name = "user") {
               handleDeleteRecords={handleDeleteRecords}
               setSelectDelete={setSelectDelete}
               showDelete={showDelete}
+              handleSearch={handleSearch}
             />
           )}
           <div className={style["TableContainer"]}>
             {data.result === "empty" ? (
-              <h1 className={classNames(style["TableResult"], LTR.className)}>
-                No Data Available!!
-              </h1>
+              <>
+                <h1 className={classNames(style["TableResult"], LTR.className)}>
+                  No Data Available!!
+                </h1>
+                <ButtonStyle4
+                  size="small"
+                  style={{ fontSize: "0.8em" }}
+                  name="refresh"
+                  onClick={handleRefetch}
+                >
+                  Refresh
+                </ButtonStyle4>
+              </>
             ) : data.result === "failed" ? (
-              <h1 className={classNames(style["TableResult"], LTR.className)}>
-                Failed to load data!!
-              </h1>
+              <>
+                <h1 className={classNames(style["TableResult"], LTR.className)}>
+                  Failed to load data!!
+                </h1>
+                <ButtonStyle4
+                  size="small"
+                  style={{ fontSize: "0.8em" }}
+                  name="refresh"
+                  onClick={handleRefetch}
+                >
+                  Refresh
+                </ButtonStyle4>
+              </>
             ) : (
               <>
                 <table className={style["Table"]}>

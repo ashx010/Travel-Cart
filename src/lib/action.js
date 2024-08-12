@@ -90,12 +90,125 @@ export const handleUserData = async () => {
   }
 };
 
-export const handleAdminTableData = async ({ table_name }, skip, take) => {
+export const handleAdminTableData = async ({ table_name }, skip, take, searchQuery) => {
   try {
+    let whereClause = {};
+
+    if (searchQuery) {
+      const searchInt = parseInt(searchQuery, 10);
+      switch(table_name){
+        case "user":
+          whereClause = {
+            OR: [
+              { id: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { name: { contains: searchQuery, mode: 'insensitive' } },
+              { username: { contains: searchQuery, mode: 'insensitive' } },
+              { email: { contains: searchQuery, mode: 'insensitive' } },
+              { country: { contains: searchQuery, mode: 'insensitive' } },
+              { contactNumber: { contains: searchQuery, mode: 'insensitive' } },
+              { address: { contains: searchQuery, mode: 'insensitive' } },
+            ],
+          };
+          break;
+        
+        case "vendor":
+          whereClause = {
+            OR: [
+              { id: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { companyName: { contains: searchQuery, mode: 'insensitive' } },
+              { socialMediaLinks: { contains: searchQuery, mode: 'insensitive' } },
+              { userId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+            ],
+          };
+          break;
+        
+        case "travelPackage":
+          whereClause = {
+            OR: [
+              { id: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { vendorId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { title: { contains: searchQuery, mode: 'insensitive' } },
+              { destination: { contains: searchQuery, mode: 'insensitive' } },
+              { durationDays: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { cost: isNaN(searchInt) ? undefined : { equals: searchInt } },
+            ],
+          };
+          break;
+        
+        case "order":
+          whereClause = {
+            OR: [
+              { id: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { userId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { packageId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { totalAmount: isNaN(searchInt) ? undefined : { equals: searchInt } },
+            ],
+          };
+          break;
+        
+        case "review":
+          whereClause = {
+            OR: [
+              { id: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { userId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { packageId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { reviewText: { contains: searchQuery, mode: 'insensitive' } },
+            ],
+          };
+          break;
+        
+        case "complaint":
+          whereClause = {
+            OR: [
+              { id: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { userId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { relatedOrderId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { description: { contains: searchQuery, mode: 'insensitive' } },
+            ],
+          };
+          break;
+        
+        case "query":
+          whereClause = {
+            OR: [
+              { id: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { userId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { queryText: { contains: searchQuery, mode: 'insensitive' } },
+            ],
+          };
+          break;
+
+        case "feedback":
+          whereClause = {
+            OR: [
+              { id: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { userId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { feedbackText: { contains: searchQuery, mode: 'insensitive' } },
+            ],
+          };
+          break;
+
+        case "suggestion":
+          whereClause = {
+            OR: [
+              { id: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { userId: isNaN(searchInt) ? undefined : { equals: searchInt } },
+              { suggestionText: { contains: searchQuery, mode: 'insensitive' } },
+            ],
+          };
+          break;
+          
+        default:
+          whereClause = {};
+      }
+    }
+
     const count = await prisma[table_name].count();
+
     const result = await prisma[table_name].findMany({
       skip,
       take,
+      where: whereClause,
       orderBy: {
         id: "desc",
       },

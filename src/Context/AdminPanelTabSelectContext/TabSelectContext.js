@@ -7,13 +7,8 @@ export function useTab() {
   return useContext(TabContext);
 }
 
-export function TabProvider({ children }) {
-  const [tabsState, setTabsState] = useState({
-    overview: true,
-    User: false,
-    Vendors: false,
-    Packages: false,
-  });
+export function TabProvider({ table_name={} ,children }) {
+  const [tabsState, setTabsState] = useState(table_name);
 
   return (
     <TabContext.Provider value={{ tabsState, setTabsState }}>

@@ -95,6 +95,17 @@
   margin-left: 5%;
   border-radius: 2em;
   backdrop-filter: blur(1px);
+  height: 50vh;
+  overflow: auto;
+}
+.TablesList::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+.TablesList::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: 1px solid var(--white);
+  border-radius: 2px;
 }
 .TablesListItem {
   text-transform: capitalize;
