@@ -18,6 +18,8 @@ export default function Featured() {
           cardContainerClass={style["card-container-featured"]}
           cardHeaderClass={style["card-header-featured"]}
           cardBodyDescClass={style["card-body-desc-featured"]}
+          cardImageClass = {style["card-image-featured"]}
+          headerFullWidthClass = {style["header-full-width-featured"]}
           apply3dEffect = {true}
           applyTorchEffect = {true}
           cardContainerStyle={{
@@ -34,6 +36,7 @@ export default function Featured() {
             rating={data.rating}
           />}
           applyHeaderFullWidth={true}
+          displayFullScreenSVG={false}
         />
       ))}
     </div>

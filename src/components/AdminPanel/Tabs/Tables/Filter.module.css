@@ -140,6 +140,10 @@
   .addnewContainer {
     width: 30rem;
   }
+  .filter-item {
+    margin: 5px;
+    position: relative;
+  }
   .addnewContainer.active {
     transform: translateX(-20%);
   }

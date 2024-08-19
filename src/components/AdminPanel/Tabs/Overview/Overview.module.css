@@ -66,3 +66,9 @@
   }
   
 }
+
+@media (max-width: 500px) {
+  .OverviewInfoCard{
+    width: 175px;
+  }
+}

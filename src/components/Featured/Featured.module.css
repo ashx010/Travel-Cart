@@ -26,6 +26,17 @@
   height: 15rem;
 }
 
+.card-container-featured:hover{
+  z-index: 1000;
+  overflow: unset !important;
+  filter: drop-shadow(0px 0px 5000px #1d3557cc);
+}
+
+.card-container-featured:hover .card-image-featured{
+  transform: scale(1.2) translateX(15%);
+  box-shadow: 0px 0px 40px #1d355788;
+}
+
 .card-header-featured{
   width: 40% !important;
   height: 100%;
@@ -41,6 +52,11 @@
   align-items: flex-start !important;
   justify-content: space-around !important;
   height: 100%;
+}
+
+.card-container-featured:hover .card-body-desc-featured{
+  transform: scale(1.2);
+  text-shadow: 5px 5px 15px #1d3557;
 }
 
 .card-body-dsc-infoot {
@@ -61,6 +77,10 @@
   font-size: 1.2em;
   font-weight: 600;
   font-variant: small-caps;
+}
+
+.card-container-featured:hover .card-body-item1{
+  transform: translate( 10%, -10%) scale(1.2);
 }
 
 .card-body-item2 {
@@ -98,6 +118,11 @@
   text-align: end !important;
 }
 
+.card-container-featured:hover .card-body-item4, .card-container-featured:hover .card-body-item5, .card-container-featured:hover .card-body-item6{
+  text-shadow: none;
+  transform: scale(0.7);
+}
+
 .card-body-item7 {
   font-size: 1.1em;
   font-weight: 600;
@@ -105,11 +130,20 @@
   width: auto !important;
 }
 
+.card-container-featured:hover .card-body-item7{
+  filter: drop-shadow(0px 0px 15px #1d3557cc);
+}
+
 .card-body-item8 {
   font-size: 1em;
   font-weight: 600;
   font-variant: small-caps;
   width: auto !important;
+}
+
+.card-container-featured:hover .header-full-width-featured .card-image-featured{
+  transform: translateX(0);
+  height: 200% !important;
 }
 
 @media (max-width: 850px) {
@@ -131,6 +165,41 @@
   .card-body-dsc-infoot.sub-heading {
     flex-direction: column;
   }
+
+  .card-container-featured:hover .header-full-width-featured .card-image-featured{
+    transform: unset;
+    height: 100% !important;
+  }
+
+  .card-container-featured:hover .card-body-item7{
+    filter: unset;
+  }
+
+  .card-container-featured:hover .card-body-item4, .card-container-featured:hover .card-body-item5, .card-container-featured:hover .card-body-item6{
+    text-shadow: none;
+    transform: unset;
+  }
+
+  .card-container-featured:hover .card-body-item1{
+    transform: unset;
+  }
+
+  .card-container-featured:hover .card-body-desc-featured{
+    transform: unset;
+    text-shadow: unset;
+  }
+
+  .card-container-featured:hover{
+    z-index: 1000;
+    overflow: hidden !important;
+    filter: drop-shadow(0px 0px 5000px #1d3557cc);
+  }
+  
+  .card-container-featured:hover .card-image-featured{
+    transform: unset;
+    box-shadow: unset;
+  }
+
 }
 
 @media (max-width: 500px) {

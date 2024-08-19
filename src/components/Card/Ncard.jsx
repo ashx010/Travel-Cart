@@ -37,19 +37,21 @@ export default function Ncard({
   applyImgHover1Sizes = "33vw",
   applyImgHover2Sizes = "33vw",
   applyHeaderFullWidth = false,
+  displayFullScreenSVG = true,
+  headerFullWidthClass = "",
 }) {
   const cref = useRef(null);
   const torchRef = useRef(null);
   const [isFullWidth, setIsFullWidth] = useState(false);
-  const [fullWidthActive, setFullWidthActive] = useState("");
+  const [fullWidthActive, setFullWidthActive] = useState([]);
   const [isResposive, setIsResponsive] = useState(false);
 
   const handleHeaderFullWidth = () => {
     setIsFullWidth(!isFullWidth);
-    if (!fullWidthActive) {
-      setFullWidthActive(style["active-full-width"]);
+    if (fullWidthActive.length === 0) {
+      setFullWidthActive([style["active-full-width"], headerFullWidthClass]);
     } else {
-      setFullWidthActive("");
+      setFullWidthActive([]);
     }
   };
 
@@ -127,9 +129,9 @@ export default function Ncard({
       {(cardHeaderClass || cardHeaderStyle || imgSrc) && (
         <div
           style={cardHeaderStyle}
-          className={classNames(style["cardHeader"], fullWidthActive, cardHeaderClass)}
+          className={classNames(style["cardHeader"], ...fullWidthActive, cardHeaderClass)}
         >
-          {!isResposive && applyHeaderFullWidth && (
+          {!isResposive && applyHeaderFullWidth && displayFullScreenSVG && (
             !isFullWidth ? (
               <FullscreenIcon
                 style={{
